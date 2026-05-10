@@ -64,6 +64,19 @@
         <p>如果某類資料有自己的欄位、列表、分類或網址結構，就適合使用 CPT。例如「課程」可能有授課教師、週次、難度與教材連結，與一般文章不同。</p>
         <h3 id="sec-14-1-1">CPT 與分類法</h3>
         <p>CPT 定義內容類型，Taxonomy 定義分類方式。例如 <code>course</code> 是內容類型，而「難度」、「主題」、「學期」可以是分類法。</p>
+        <h3 id="sec-14-1-2">什麼時候不需要 CPT</h3>
+        <p>不是所有資料都需要 CPT。如果只是一般教學文章，用分類與標籤即可；如果只是頁面中的一段固定內容，也不需要建立新的內容類型。CPT 適合「有一批同類型資料，需要獨立管理、查詢與呈現」的情境。</p>
+        <ul>
+          <li>適合 CPT：課程、商品、作品、活動、師資、出版品。</li>
+          <li>不一定需要 CPT：網站簡介、單一聯絡資訊、首頁區塊文案。</li>
+        </ul>
+        <h3 id="sec-14-1-3">CPT、欄位與分類的分工</h3>
+        <p>設計資料模型時，可以用三個問題拆解：</p>
+        <ol>
+          <li>這是什麼種類的內容？如果答案是「課程」，它可能是 CPT。</li>
+          <li>它需要哪些屬性？例如教師、週次、時數，這些可能是 meta fields。</li>
+          <li>它如何被分組？例如難度、主題、學期，這些可能是 taxonomy。</li>
+        </ol>
         <h2 id="sec-14-2">14.2 在外掛中建立 Custom Post Type</h2>
         <pre><code>add_action('init', 'wp2026_register_course_cpt');
 function wp2026_register_course_cpt() {
@@ -79,11 +92,69 @@ function wp2026_register_course_cpt() {
         'show_in_rest' =&gt; true,
     ]);
 }</code></pre>
-        <h3 id="sec-14-2-1">網址與重新整理固定網址</h3>
+        <h3 id="sec-14-2-1">重要參數說明</h3>
+        <ul>
+          <li><code>public</code>：是否可在前台查詢與顯示。</li>
+          <li><code>has_archive</code>：是否有封存列表頁。</li>
+          <li><code>rewrite</code>：設定網址 slug。</li>
+          <li><code>supports</code>：後台編輯器支援哪些功能。</li>
+          <li><code>show_in_rest</code>：是否支援區塊編輯器與 REST API。</li>
+          <li><code>menu_icon</code>：後台選單圖示。</li>
+        </ul>
+        <pre><code>'rewrite' =&gt; ['slug' =&gt; 'courses'],
+'supports' =&gt; ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],</code></pre>
+        <h3 id="sec-14-2-2">網址與重新整理固定網址</h3>
         <p>新增 CPT 後若前台出現 404，通常需要到「設定 → 固定網址」按儲存，讓 WordPress 重新產生 rewrite rules。</p>
-        <h3 id="sec-14-2-2">模板檔案</h3>
+        <p>正式外掛可在啟用時呼叫 <code>flush_rewrite_rules()</code>，但不要在每次頁面載入時呼叫，否則會影響效能。</p>
+        <pre><code>register_activation_hook(__FILE__, 'wp2026_activate');
+function wp2026_activate() {
+    wp2026_register_course_cpt();
+    flush_rewrite_rules();
+}</code></pre>
+        <h3 id="sec-14-2-3">註冊自訂分類法</h3>
+        <p>以下範例替課程建立「課程難度」分類法：</p>
+        <pre><code>add_action('init', 'wp2026_register_course_taxonomy');
+function wp2026_register_course_taxonomy() {
+    register_taxonomy('course_level', ['course'], [
+        'labels' =&gt; ['name' =&gt; '課程難度'],
+        'public' =&gt; true,
+        'hierarchical' =&gt; true,
+        'show_in_rest' =&gt; true,
+        'rewrite' =&gt; ['slug' =&gt; 'course-level'],
+    ]);
+}</code></pre>
+        <h3 id="sec-14-2-4">新增課程自訂欄位</h3>
+        <p>課程常需要教師、時數、教材網址等欄位。可以先用 meta box 實作，理解資料儲存流程。</p>
+        <pre><code>add_action('add_meta_boxes', 'wp2026_add_course_meta_box');
+function wp2026_add_course_meta_box() {
+    add_meta_box(
+        'wp2026_course_info',
+        '課程資訊',
+        'wp2026_render_course_meta_box',
+        'course'
+    );
+}</code></pre>
+        <pre><code>function wp2026_save_course_meta($post_id) {
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+    $hours = isset($_POST['wp2026_hours']) ? absint($_POST['wp2026_hours']) : 0;
+    update_post_meta($post_id, '_wp2026_hours', $hours);
+}
+add_action('save_post_course', 'wp2026_save_course_meta');</code></pre>
+        <h3 id="sec-14-2-5">模板檔案</h3>
         <p>若 CPT 名稱是 <code>course</code>，可在主題中建立 <code>archive-course.php</code> 與 <code>single-course.php</code> 控制列表與單篇頁面。</p>
-        <h3 id="sec-14-2-3">本章練習</h3>
+        <pre><code>// archive-course.php 中可使用一般 Loop
+if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        the_title('&lt;h2&gt;', '&lt;/h2&gt;');
+        the_excerpt();
+    }
+}</code></pre>
+        <h3 id="sec-14-2-6">REST API 與區塊編輯器</h3>
+        <p><code>show_in_rest</code> 設為 <code>true</code> 後，CPT 才能完整支援區塊編輯器，也能透過 REST API 存取。若未來要做前後端分離或自訂區塊，這個設定很重要。</p>
+        <h3 id="sec-14-2-7">本章練習</h3>
         <ol><li>建立 <code>course</code> CPT。</li><li>新增三筆課程資料。</li><li>建立課程封存頁模板。</li><li>加入一個課程分類法，例如「難度」。</li></ol>
 
 
@@ -105,10 +176,16 @@ function wp2026_register_course_cpt() {
                 <ul>
           <li class="level-2"><a href="#sec-14-1">14.1 自定義貼文類型應用之外掛介紹</a></li>
           <li class="level-3"><a href="#sec-14-1-1">CPT 與分類法</a></li>
+          <li class="level-3"><a href="#sec-14-1-2">什麼時候不需要 CPT</a></li>
+          <li class="level-3"><a href="#sec-14-1-3">CPT、欄位與分類的分工</a></li>
           <li class="level-2"><a href="#sec-14-2">14.2 在外掛中建立 Custom Post Type</a></li>
-          <li class="level-3"><a href="#sec-14-2-1">網址與固定網址</a></li>
-          <li class="level-3"><a href="#sec-14-2-2">模板檔案</a></li>
-          <li class="level-3"><a href="#sec-14-2-3">本章練習</a></li>
+          <li class="level-3"><a href="#sec-14-2-1">重要參數說明</a></li>
+          <li class="level-3"><a href="#sec-14-2-2">網址與固定網址</a></li>
+          <li class="level-3"><a href="#sec-14-2-3">註冊自訂分類法</a></li>
+          <li class="level-3"><a href="#sec-14-2-4">新增課程自訂欄位</a></li>
+          <li class="level-3"><a href="#sec-14-2-5">模板檔案</a></li>
+          <li class="level-3"><a href="#sec-14-2-6">REST API 與區塊編輯器</a></li>
+          <li class="level-3"><a href="#sec-14-2-7">本章練習</a></li>
         </ul>
       </aside>
     </div>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CHAPTER 16 - 進階主題與活用 AI：課程的最後一章，我們綜合討論 WordPress 的未來趨勢、實務上的網站維運，以及如何善用 ChatGPT 等 AI 工具加速開發。" />
+  <title>CHAPTER 16｜進階主題與活用 AI - WP2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="../index.html" class="nav-link">首頁</a>
+        <a href="../lessons.html" class="nav-link active">所有章節</a>
+        <a href="../index.html#features" class="nav-link">特色</a>
+        <a href="../index.html#about" class="nav-link">關於</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <main class="article">
+    <div class="container-narrow">
+      <header class="article-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">首頁</a> / <a href="../lessons.html">所有章節</a> / <span>CHAPTER 16</span>
+        </nav>
+        <span class="article-eyebrow">CHAPTER 16 · 高階 · 觀念</span>
+        <h1 class="article-title">進階主題與活用 AI</h1>
+        <div class="article-meta">
+          <span>共 3 節</span>
+          <span>更新於 2026/05</span>
+        </div>
+      </header>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-body">
+        <p>課程的最後一章，我們綜合討論 WordPress 的未來趨勢、實務上的網站維運，以及如何善用 ChatGPT 等 AI 工具加速開發。</p>
+        <h2 id="sec-16-1">16.1 WordPress 的演進趨勢</h2>
+        <p>近年 WordPress 的重要變革：Block Editor (Gutenberg)、Full Site Editing (FSE)、Block Theme、theme.json、Interactivity API、Headless WordPress。</p>
+        <p>本節介紹這些趨勢的影響，以及作為開發者該如何因應。</p>
+
+        <h2 id="sec-16-2">16.2 網站備份、搬家與開發流程</h2>
+        <p>備份工具：UpdraftPlus、Duplicator、All-in-One WP Migration。</p>
+        <p>搬家流程：備份 → 上傳到新主機 → 還原資料庫 → 修改 wp-config.php → 更新 site URL。</p>
+        <p>開發流程建議：本地開發 → Staging 測試 → 正式環境部署，搭配 Git 版本控制。</p>
+
+        <h2 id="sec-16-3">16.3 ChatGPT 活用術</h2>
+        <p>ChatGPT 對 WordPress 開發的助益：產生外掛骨架、撰寫 hook 範例、解釋錯誤訊息、生成 CSS、撰寫文章草稿。</p>
+        <p>Prompt 撰寫技巧：明確說明 WordPress 版本、所需 hook、預期輸入輸出，並要求遵循 WP Coding Standards。</p>
+        <p>搭配 GitHub Copilot 在 IDE 內自動補全，能讓開發效率提升 2~3 倍。</p>
+
+        <nav class="article-nav">
+          <a href="chapter-15.html">
+            <div class="article-nav-label">← 上一章</div>
+            <div class="article-nav-title">CHAPTER 15 · 實用商品列表外掛</div>
+          </a>
+          <a href="../lessons.html" class="article-nav-next">
+            <div class="article-nav-label">完成 →</div>
+            <div class="article-nav-title">回到所有章節</div>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="toc">
+        <div class="toc-title">本章節次</div>
+        <ul>
+          <li class="level-2"><a href="#sec-16-1">16.1 WordPress 的演進趨勢</a></li>
+          <li class="level-2"><a href="#sec-16-2">16.2 網站備份、搬家與開發流程</a></li>
+          <li class="level-2"><a href="#sec-16-3">16.3 ChatGPT 活用術</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

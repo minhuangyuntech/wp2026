@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WP2026 - 從零開始的 WordPress 完整教學課程，依教科書 16 個章節編排，涵蓋 WordPress 基礎、HTML/CSS/JS、PHP、佈景主題開發、外掛開發與 AI 活用。" />
+  <meta name="author" content="minhuangyuntech" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="WP2026 | WordPress 完整教學課程" />
+  <meta property="og:description" content="16 個章節從零開始學會 WordPress：安裝、HTML/CSS/JS、PHP、佈景主題、外掛開發、CPT 與 AI 活用。" />
+
+  <title>WP2026 | WordPress 完整教學課程</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="index.html" class="nav-link active">首頁</a>
+        <a href="lessons.html" class="nav-link">所有章節</a>
+        <a href="#features" class="nav-link">特色</a>
+        <a href="#about" class="nav-link">關於</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式" title="切換主題">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+        2026 全新改版
+      </span>
+      <h1 class="hero-title">
+        從零開始打造你的<br />
+        <span class="highlight">WordPress 網站</span>
+      </h1>
+      <p class="hero-subtitle">
+        系統化的 WordPress 完整教學課程，從安裝、HTML/CSS/JavaScript、PHP、
+        佈景主題與外掛開發，到 Custom Post Type、商品列表外掛與 AI 活用，
+        共 16 個章節帶你成為真正的 WordPress 開發者。
+      </p>
+      <div class="hero-actions">
+        <a href="lessons.html" class="btn btn-primary">
+          開始學習
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="lessons/chapter-01.html" class="btn btn-secondary">
+          先看第一章
+        </a>
+      </div>
+
+      <div class="hero-meta">
+        <div class="hero-stat">
+          <div class="hero-stat-num">16</div>
+          <div class="hero-stat-label">完整章節</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">免費開源</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">2026</div>
+          <div class="hero-stat-label">最新版本</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Why WP2026</span>
+        <h2 class="section-title">為什麼選擇這份教學</h2>
+        <p class="section-subtitle">
+          從基礎觀念到實作專案，依照教科書 16 章循序漸進，每個章節都有可執行的範例。
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="feature-title">由淺入深的完整路徑</h3>
+          <p class="feature-desc">
+            從 WordPress 安裝開始，一路到佈景主題、外掛、Custom Post Type 與 AI 活用，無痛銜接。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="feature-title">大量實作 Code 範例</h3>
+          <p class="feature-desc">
+            每個章節搭配 PHP / JavaScript / HTML / CSS 程式碼片段，並有完整外掛實作範例。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="feature-title">符合 2026 最新標準</h3>
+          <p class="feature-desc">
+            涵蓋 Block Editor、Site Editor (FSE)、PHP 8.x、GitHub Copilot 與 ChatGPT 活用術。
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3 class="feature-title">理論 × 實戰並重</h3>
+          <p class="feature-desc">
+            不只教操作，更解釋背後的 Hooks、Template Hierarchy、WP_Query 等核心觀念。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Modules -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Course Outline</span>
+        <h2 class="section-title">16 個章節完整課程</h2>
+        <p class="section-subtitle">
+          建議依序學習，也可以從感興趣的主題切入。每個章節獨立成篇，方便日後回頭參考。
+        </p>
+      </div>
+
+      <div class="modules-grid">
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 01</span>
+            <span class="module-tag tag-beginner">基礎</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-01.html" class="module-title-link">WordPress 的安裝與結構剖析</a>
+          </h3>
+          <p class="module-desc">WordPress 基礎知識、本地端安裝、網站結構分析。</p>
+          <div class="module-meta"><span>3 節</span><span>觀念 + 實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 02</span>
+            <span class="module-tag tag-beginner">基礎</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-02.html" class="module-title-link">HTML / CSS / JavaScript 基礎</a>
+          </h3>
+          <p class="module-desc">前端三大支柱：HTML 標記、CSS 樣式與 JavaScript 互動。</p>
+          <div class="module-meta"><span>3 節</span><span>觀念</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 03</span>
+            <span class="module-tag tag-beginner">基礎</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-03.html" class="module-title-link">jQuery / AJAX 基礎</a>
+          </h3>
+          <p class="module-desc">jQuery 操作 DOM、AJAX 非同步資料傳輸基礎。</p>
+          <div class="module-meta"><span>2 節</span><span>觀念 + 實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 04</span>
+            <span class="module-tag tag-beginner">基礎</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-04.html" class="module-title-link">WordPress 佈景主題基礎</a>
+          </h3>
+          <p class="module-desc">WordPress 佈景主題、編輯功能與動手調整佈景主題。</p>
+          <div class="module-meta"><span>3 節</span><span>操作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 05</span>
+            <span class="module-tag tag-intermediate">進階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-05.html" class="module-title-link">PHP 程式語言快速導覽</a>
+          </h3>
+          <p class="module-desc">PHP 簡介、變數、決策、迴圈、函式，以及 GitHub Copilot 安裝與使用。</p>
+          <div class="module-meta"><span>6 節</span><span>觀念 + 實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 06</span>
+            <span class="module-tag tag-intermediate">進階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-06.html" class="module-title-link">手工打造佈景主題</a>
+          </h3>
+          <p class="module-desc">自訂佈景主題基礎、子佈景主題 (Child Theme) 的運用。</p>
+          <div class="module-meta"><span>2 節</span><span>實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 07</span>
+            <span class="module-tag tag-intermediate">進階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-07.html" class="module-title-link">WordPress 所需的 PHP 程式設計技巧</a>
+          </h3>
+          <p class="module-desc">PHP 物件導向基礎與進階、深入分析佈景主題的內容顯示。</p>
+          <div class="module-meta"><span>3 節</span><span>觀念 + 實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 08</span>
+            <span class="module-tag tag-intermediate">進階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-08.html" class="module-title-link">WordPress 佈景主題製作實例（上）</a>
+          </h3>
+          <p class="module-desc">深入探討佈景主題設計、進階佈景主題設計。</p>
+          <div class="module-meta"><span>2 節</span><span>實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 09</span>
+            <span class="module-tag tag-intermediate">進階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-09.html" class="module-title-link">WordPress 佈景主題製作實例（下）</a>
+          </h3>
+          <p class="module-desc">WP_Query 類別、其他頁面模板的設計與其他進階主題。</p>
+          <div class="module-meta"><span>3 節</span><span>實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 10</span>
+            <span class="module-tag tag-advanced">高階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-10.html" class="module-title-link">佈景主題進階開發工具</a>
+          </h3>
+          <p class="module-desc">Underscores 佈景主題、Sage 簡介與使用。</p>
+          <div class="module-meta"><span>2 節</span><span>工具</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 11</span>
+            <span class="module-tag tag-advanced">高階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-11.html" class="module-title-link">WordPress 外掛開發基礎</a>
+          </h3>
+          <p class="module-desc">外掛入門、Hooks 簡介與應用、過濾文章內容範例。</p>
+          <div class="module-meta"><span>3 節</span><span>實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 12</span>
+            <span class="module-tag tag-advanced">高階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-12.html" class="module-title-link">外掛選項設定頁設計</a>
+          </h3>
+          <p class="module-desc">外掛在控制台中的操作、Shortcode 短代碼的應用。</p>
+          <div class="module-meta"><span>2 節</span><span>實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 13</span>
+            <span class="module-tag tag-advanced">高階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-13.html" class="module-title-link">實用外掛設計與小工具的製作</a>
+          </h3>
+          <p class="module-desc">計數器外掛介紹與實作、建立小工具 (Widget)。</p>
+          <div class="module-meta"><span>3 節</span><span>實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 14</span>
+            <span class="module-tag tag-advanced">高階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-14.html" class="module-title-link">Custom Post Type 的應用</a>
+          </h3>
+          <p class="module-desc">自定義貼文類型外掛介紹、在外掛中建立 Custom Post Type。</p>
+          <div class="module-meta"><span>2 節</span><span>實作</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 15</span>
+            <span class="module-tag tag-advanced">高階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-15.html" class="module-title-link">實用商品列表外掛</a>
+          </h3>
+          <p class="module-desc">商品列表外掛規劃及設計、儲存自訂資料、顯示商品列表。</p>
+          <div class="module-meta"><span>3 節</span><span>專案</span></div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-header">
+            <span class="module-num">CHAPTER 16</span>
+            <span class="module-tag tag-advanced">高階</span>
+          </div>
+          <h3 class="module-title">
+            <a href="lessons/chapter-16.html" class="module-title-link">進階主題與活用 AI</a>
+          </h3>
+          <p class="module-desc">WordPress 演進趨勢、網站備份與搬家、ChatGPT 活用術。</p>
+          <div class="module-meta"><span>3 節</span><span>觀念</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About / CTA -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="cta-block">
+        <h2>準備好建立你的第一個 WordPress 網站了嗎？</h2>
+        <p>從第一章開始，依序跟著做，幾天內就能擁有一個專屬於自己的網站。</p>
+        <a href="lessons.html" class="btn btn-secondary">查看所有章節</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-brand">
+            <span class="nav-logo">W</span>
+            <span>WP2026</span>
+          </a>
+          <p>2026 年最新版本的 WordPress 完整教學課程，由 minhuangyuntech 製作。</p>
+        </div>
+        <div class="footer-col">
+          <h4>章節</h4>
+          <ul>
+            <li><a href="lessons.html">所有章節</a></li>
+            <li><a href="lessons.html#beginner">基礎章節</a></li>
+            <li><a href="lessons.html#intermediate">進階章節</a></li>
+            <li><a href="lessons.html#advanced">高階章節</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>資源</h4>
+          <ul>
+            <li><a href="https://wordpress.org/" target="_blank" rel="noopener">WordPress.org</a></li>
+            <li><a href="https://developer.wordpress.org/" target="_blank" rel="noopener">Developer Docs</a></li>
+            <li><a href="https://github.com/minhuangyuntech" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026 · Built with HTML / CSS / JavaScript
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CHAPTER 05 - PHP 程式語言快速導覽：WordPress 是以 PHP 撰寫的，要進入主題與外掛開發，PHP 是必備技能。本章將快速帶過 PHP 的核心語法，並介紹強大的 AI 助手 GitHub Copilot。" />
+  <title>CHAPTER 05｜PHP 程式語言快速導覽 - WP2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="../index.html" class="nav-link">首頁</a>
+        <a href="../lessons.html" class="nav-link active">所有章節</a>
+        <a href="../index.html#features" class="nav-link">特色</a>
+        <a href="../index.html#about" class="nav-link">關於</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <main class="article">
+    <div class="container-narrow">
+      <header class="article-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">首頁</a> / <a href="../lessons.html">所有章節</a> / <span>CHAPTER 05</span>
+        </nav>
+        <span class="article-eyebrow">CHAPTER 05 · 進階 · 觀念 + 實作</span>
+        <h1 class="article-title">PHP 程式語言快速導覽</h1>
+        <div class="article-meta">
+          <span>共 6 節</span>
+          <span>更新於 2026/05</span>
+        </div>
+      </header>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-body">
+        <p>WordPress 是以 PHP 撰寫的，要進入主題與外掛開發，PHP 是必備技能。本章將快速帶過 PHP 的核心語法，並介紹強大的 AI 助手 GitHub Copilot。</p>
+        <h2 id="sec-5-1">5.1 PHP 程式語言簡介</h2>
+        <p>PHP 是廣受歡迎的伺服器端腳本語言，全球超過 70% 的網站使用 PHP，WordPress 即是最大的應用案例。</p>
+        <p>PHP 程式碼以 <code>&lt;?php ... ?&gt;</code> 包裹，執行在伺服器端，輸出 HTML 給瀏覽器。</p>
+
+        <h2 id="sec-5-2">5.2 變數與基本資料結構</h2>
+        <p>PHP 變數以 <code>$</code> 開頭：<code>$name = 'WordPress';</code>。</p>
+        <p>常用資料結構：字串、整數、浮點數、布林值、陣列 (Array) 與關聯陣列 (Associative Array)、物件 (Object)。</p>
+
+        <h2 id="sec-5-3">5.3 決策指令的應用</h2>
+        <p>決策 (Conditional) 控制程式分支：<code>if / else / elseif</code>、<code>switch</code>、三元運算 <code>$a ? $b : $c</code>。</p>
+        <p>PHP 7 之後新增的 null 合併運算子 <code>??</code> 在 WordPress 中也很常用。</p>
+
+        <h2 id="sec-5-4">5.4 迴圈指令</h2>
+        <p>PHP 提供 <code>for</code>、<code>while</code>、<code>do...while</code>、<code>foreach</code> 四種迴圈。</p>
+        <p>在 WordPress 中最常見的就是 <strong>The Loop</strong>：<code>while ( have_posts() ) { the_post(); ... }</code>，用於依序輸出文章。</p>
+
+        <h2 id="sec-5-5">5.5 函式的運用</h2>
+        <p>函式 (Function) 是可重複使用的程式碼區塊：<code>function name($arg) { return $value; }</code>。</p>
+        <p>WordPress 內建大量函式如 <code>get_the_title()</code>、<code>the_permalink()</code>、<code>wp_enqueue_script()</code>，是開發必備。</p>
+
+        <h2 id="sec-5-6">5.6 GitHub Copilot 的安裝與使用</h2>
+        <p>GitHub Copilot 是 AI 程式碼助手，可在 VS Code 中即時建議程式碼。</p>
+        <p>本節介紹如何在 VS Code 安裝 Copilot 擴充套件、登入 GitHub 帳號、啟用授權，並示範如何用註解引導 Copilot 撰寫 WordPress 函式。</p>
+
+        <nav class="article-nav">
+          <a href="chapter-04.html">
+            <div class="article-nav-label">← 上一章</div>
+            <div class="article-nav-title">CHAPTER 04 · WordPress 佈景主題基礎</div>
+          </a>
+          <a href="chapter-06.html" class="article-nav-next">
+            <div class="article-nav-label">下一章 →</div>
+            <div class="article-nav-title">CHAPTER 06 · 手工打造佈景主題</div>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="toc">
+        <div class="toc-title">本章節次</div>
+        <ul>
+          <li class="level-2"><a href="#sec-5-1">5.1 PHP 程式語言簡介</a></li>
+          <li class="level-2"><a href="#sec-5-2">5.2 變數與基本資料結構</a></li>
+          <li class="level-2"><a href="#sec-5-3">5.3 決策指令的應用</a></li>
+          <li class="level-2"><a href="#sec-5-4">5.4 迴圈指令</a></li>
+          <li class="level-2"><a href="#sec-5-5">5.5 函式的運用</a></li>
+          <li class="level-2"><a href="#sec-5-6">5.6 GitHub Copilot 的安裝與使用</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

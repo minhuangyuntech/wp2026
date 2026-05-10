@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CHAPTER 06 - 手工打造佈景主題：本章我們不再依賴現成主題，而是從零開始手工打造一個自己的佈景主題，並學習子主題 (Child Theme) 這項保護客製化內容的最佳實踐。" />
+  <title>CHAPTER 06｜手工打造佈景主題 - WP2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="../index.html" class="nav-link">首頁</a>
+        <a href="../lessons.html" class="nav-link active">所有章節</a>
+        <a href="../index.html#features" class="nav-link">特色</a>
+        <a href="../index.html#about" class="nav-link">關於</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <main class="article">
+    <div class="container-narrow">
+      <header class="article-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">首頁</a> / <a href="../lessons.html">所有章節</a> / <span>CHAPTER 06</span>
+        </nav>
+        <span class="article-eyebrow">CHAPTER 06 · 進階 · 實作</span>
+        <h1 class="article-title">手工打造佈景主題</h1>
+        <div class="article-meta">
+          <span>共 2 節</span>
+          <span>更新於 2026/05</span>
+        </div>
+      </header>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-body">
+        <p>本章我們不再依賴現成主題，而是從零開始手工打造一個自己的佈景主題，並學習子主題 (Child Theme) 這項保護客製化內容的最佳實踐。</p>
+        <h2 id="sec-6-1">6.1 自訂佈景主題基礎</h2>
+        <p>一個最簡單的 WordPress 主題只需要兩個檔案：<code>style.css</code>（含主題標頭資訊）與 <code>index.php</code>。</p>
+        <p><code>style.css</code> 開頭的註解區塊定義了主題名稱、版本、作者，例如：<code>/* Theme Name: WP2026 */</code>。</p>
+        <p>本節從建立 themes/wp2026 資料夾開始，逐步加入 <code>functions.php</code>、<code>header.php</code>、<code>footer.php</code> 等模板檔案。</p>
+
+        <h2 id="sec-6-2">6.2 子佈景主題的運用</h2>
+        <p>子主題 (Child Theme) 繼承自父主題，可在不修改父主題檔案的情況下做客製化，避免父主題更新時遺失修改。</p>
+        <p>建立子主題只需要一個資料夾、一個 <code>style.css</code>（聲明 <code>Template:</code>）和一個 <code>functions.php</code>（用 <code>wp_enqueue_style()</code> 載入父主題樣式）。</p>
+
+        <nav class="article-nav">
+          <a href="chapter-05.html">
+            <div class="article-nav-label">← 上一章</div>
+            <div class="article-nav-title">CHAPTER 05 · PHP 程式語言快速導覽</div>
+          </a>
+          <a href="chapter-07.html" class="article-nav-next">
+            <div class="article-nav-label">下一章 →</div>
+            <div class="article-nav-title">CHAPTER 07 · WordPress 所需的 PHP 程式設計技巧</div>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="toc">
+        <div class="toc-title">本章節次</div>
+        <ul>
+          <li class="level-2"><a href="#sec-6-1">6.1 自訂佈景主題基礎</a></li>
+          <li class="level-2"><a href="#sec-6-2">6.2 子佈景主題的運用</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

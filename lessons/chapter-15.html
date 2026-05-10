@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CHAPTER 15 - 實用商品列表外掛：綜合應用前面所學，本章從零打造一個「商品列表」外掛：包含 CPT、自訂欄位、Shortcode 顯示，是一個完整的小型專案。" />
+  <title>CHAPTER 15｜實用商品列表外掛 - WP2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="../index.html" class="nav-link">首頁</a>
+        <a href="../lessons.html" class="nav-link active">所有章節</a>
+        <a href="../index.html#features" class="nav-link">特色</a>
+        <a href="../index.html#about" class="nav-link">關於</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <main class="article">
+    <div class="container-narrow">
+      <header class="article-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">首頁</a> / <a href="../lessons.html">所有章節</a> / <span>CHAPTER 15</span>
+        </nav>
+        <span class="article-eyebrow">CHAPTER 15 · 高階 · 專案</span>
+        <h1 class="article-title">實用商品列表外掛</h1>
+        <div class="article-meta">
+          <span>共 3 節</span>
+          <span>更新於 2026/05</span>
+        </div>
+      </header>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-body">
+        <p>綜合應用前面所學，本章從零打造一個「商品列表」外掛：包含 CPT、自訂欄位、Shortcode 顯示，是一個完整的小型專案。</p>
+        <h2 id="sec-15-1">15.1 商品列表外掛的規劃及設計</h2>
+        <p>需求分析：建立「product」CPT、儲存商品名稱、價格、圖片、描述；提供 Shortcode 在任何頁面顯示商品列表。</p>
+        <p>資料庫規劃：使用 <code>posts</code> 儲存基本資料，<code>postmeta</code> 儲存價格等自訂欄位。</p>
+
+        <h2 id="sec-15-2">15.2 儲存自訂資料</h2>
+        <p>在 CPT 編輯頁面加入 Meta Box，提供「價格」「庫存」等欄位輸入框。</p>
+        <p>使用 <code>add_meta_box()</code> 註冊；表單送出時透過 <code>save_post</code> 鉤點驗證 nonce 並寫入 postmeta。</p>
+
+        <h2 id="sec-15-3">15.3 顯示商品列表</h2>
+        <p>註冊 <code>[product_list]</code> Shortcode，內部使用 <code>WP_Query</code> 查詢所有 product。</p>
+        <p>在 Loop 中輸出每個商品的縮圖、名稱、價格與描述，並套上響應式 CSS Grid 排版。</p>
+
+        <nav class="article-nav">
+          <a href="chapter-14.html">
+            <div class="article-nav-label">← 上一章</div>
+            <div class="article-nav-title">CHAPTER 14 · Custom Post Type 的應用</div>
+          </a>
+          <a href="chapter-16.html" class="article-nav-next">
+            <div class="article-nav-label">下一章 →</div>
+            <div class="article-nav-title">CHAPTER 16 · 進階主題與活用 AI</div>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="toc">
+        <div class="toc-title">本章節次</div>
+        <ul>
+          <li class="level-2"><a href="#sec-15-1">15.1 商品列表外掛的規劃及設計</a></li>
+          <li class="level-2"><a href="#sec-15-2">15.2 儲存自訂資料</a></li>
+          <li class="level-2"><a href="#sec-15-3">15.3 顯示商品列表</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

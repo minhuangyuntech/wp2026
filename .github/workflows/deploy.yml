@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+# 觸發條件：推送到 main 分支，或手動觸發
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# 為 GITHUB_TOKEN 設定權限以讓工作流程可以部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一時間只允許一個部署，並讓正在進行中的執行排隊
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # 建置工作 - 此處網站為純靜態 HTML/CSS/JS，不需要 build step
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 上傳整個 repository (排除 .git, .github 等)
+          path: '.'
+
+  # 部署工作
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

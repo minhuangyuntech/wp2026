@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CHAPTER 04 - WordPress 佈景主題基礎：佈景主題 (Theme) 決定了你網站的外觀與排版。本章從使用者角度出發，介紹如何挑選、安裝與調整佈景主題。" />
+  <title>CHAPTER 04｜WordPress 佈景主題基礎 - WP2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="../index.html" class="nav-link">首頁</a>
+        <a href="../lessons.html" class="nav-link active">所有章節</a>
+        <a href="../index.html#features" class="nav-link">特色</a>
+        <a href="../index.html#about" class="nav-link">關於</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <main class="article">
+    <div class="container-narrow">
+      <header class="article-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">首頁</a> / <a href="../lessons.html">所有章節</a> / <span>CHAPTER 04</span>
+        </nav>
+        <span class="article-eyebrow">CHAPTER 04 · 基礎 · 操作</span>
+        <h1 class="article-title">WordPress 佈景主題基礎</h1>
+        <div class="article-meta">
+          <span>共 3 節</span>
+          <span>更新於 2026/05</span>
+        </div>
+      </header>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-body">
+        <p>佈景主題 (Theme) 決定了你網站的外觀與排版。本章從使用者角度出發，介紹如何挑選、安裝與調整佈景主題。</p>
+        <h2 id="sec-4-1">4.1 WordPress 佈景主題</h2>
+        <p>WordPress 佈景主題分為兩大類：<strong>Classic Theme</strong>（傳統 PHP 模板）與 <strong>Block Theme</strong>（支援 Full Site Editing）。</p>
+        <p>本節介紹官方主題目錄、付費主題市集 (ThemeForest 等)，以及挑選主題的關鍵指標：更新頻率、活躍安裝數、支援度與效能表現。</p>
+
+        <h2 id="sec-4-2">4.2 佈景主題編輯功能</h2>
+        <p>後台「外觀 → 自訂」(Customizer) 提供即時預覽的視覺化編輯器，可調整網站識別、色彩、選單、小工具等。</p>
+        <p>Block Theme 則使用「外觀 → 編輯器」(Site Editor)，能直接在前台編輯 Header、Footer、Template。</p>
+
+        <h2 id="sec-4-3">4.3 動手調整佈景主題</h2>
+        <p>本節透過「附加 CSS」面板，示範如何在不修改主題檔案的情況下，加入自己的 CSS 樣式覆寫，例如修改文字顏色、隱藏元素、調整間距等。</p>
+        <p>也會介紹 <strong>選單管理</strong>、<strong>小工具區域</strong>，以及如何上傳網站圖示 (Site Icon) 與標頭圖。</p>
+
+        <nav class="article-nav">
+          <a href="chapter-03.html">
+            <div class="article-nav-label">← 上一章</div>
+            <div class="article-nav-title">CHAPTER 03 · jQuery / AJAX 基礎</div>
+          </a>
+          <a href="chapter-05.html" class="article-nav-next">
+            <div class="article-nav-label">下一章 →</div>
+            <div class="article-nav-title">CHAPTER 05 · PHP 程式語言快速導覽</div>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="toc">
+        <div class="toc-title">本章節次</div>
+        <ul>
+          <li class="level-2"><a href="#sec-4-1">4.1 WordPress 佈景主題</a></li>
+          <li class="level-2"><a href="#sec-4-2">4.2 佈景主題編輯功能</a></li>
+          <li class="level-2"><a href="#sec-4-3">4.3 動手調整佈景主題</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -53,30 +53,71 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>WordPress 是以 PHP 撰寫的，要進入主題與外掛開發，PHP 是必備技能。本章將快速帶過 PHP 的核心語法，並介紹強大的 AI 助手 GitHub Copilot。</p>
+                        <p>PHP 是 WordPress 的主要後端語言。即使你未來多半透過後台操作網站，只要想修改佈景主題或開發外掛，就必須能讀懂基本 PHP。本章快速導覽 WordPress 開發最常用的語法與思維。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>掌握 PHP 變數、陣列、條件、迴圈、函式與基本除錯方式，並能把 Copilot 當作輔助工具而不是答案來源。</p>
+          </div>
+        </div>
         <h2 id="sec-5-1">5.1 PHP 程式語言簡介</h2>
-        <p>PHP 是廣受歡迎的伺服器端腳本語言，全球超過 70% 的網站使用 PHP，WordPress 即是最大的應用案例。</p>
-        <p>PHP 程式碼以 <code>&lt;?php ... ?&gt;</code> 包裹，執行在伺服器端，輸出 HTML 給瀏覽器。</p>
-
+        <p>PHP 在伺服器端執行，負責產生最後送到瀏覽器的 HTML。WordPress 的文章查詢、模板載入、外掛 Hook 與後台管理都大量使用 PHP。</p>
+        <pre><code>&lt;?php
+$title = 'WP2026';
+echo '&lt;h1&gt;' . esc_html($title) . '&lt;/h1&gt;';
+?&gt;</code></pre>
+        <h3 id="sec-5-1-1">PHP 與 HTML 混寫</h3>
+        <p>在主題模板中，PHP 常穿插於 HTML 之間。重點是保持輸出安全：顯示文字時使用 <code>esc_html()</code>，顯示網址時使用 <code>esc_url()</code>，顯示屬性時使用 <code>esc_attr()</code>。</p>
         <h2 id="sec-5-2">5.2 變數與基本資料結構</h2>
-        <p>PHP 變數以 <code>$</code> 開頭：<code>$name = 'WordPress';</code>。</p>
-        <p>常用資料結構：字串、整數、浮點數、布林值、陣列 (Array) 與關聯陣列 (Associative Array)、物件 (Object)。</p>
+        <p>PHP 變數以 <code>$</code> 開頭。WordPress 開發最常用的資料結構是陣列，常用來存放設定、查詢參數與選項。</p>
+        <pre><code>$course = [
+    'title' =&gt; 'WordPress 外掛開發',
+    'level' =&gt; 'advanced',
+    'lessons' =&gt; 3,
+];
 
+echo esc_html($course['title']);</code></pre>
+        <h3 id="sec-5-2-1">關聯陣列與查詢參數</h3>
+        <p>WordPress 函式常接受關聯陣列，例如查詢文章時可傳入文章類型、每頁數量與排序方式。這種寫法會在 <code>WP_Query</code>、<code>register_post_type()</code>、<code>wp_enqueue_script()</code> 中反覆出現。</p>
         <h2 id="sec-5-3">5.3 決策指令的應用</h2>
-        <p>決策 (Conditional) 控制程式分支：<code>if / else / elseif</code>、<code>switch</code>、三元運算 <code>$a ? $b : $c</code>。</p>
-        <p>PHP 7 之後新增的 null 合併運算子 <code>??</code> 在 WordPress 中也很常用。</p>
-
+        <p>條件判斷可根據不同狀態輸出不同內容。WordPress 也提供許多條件式標籤，例如 <code>is_single()</code>、<code>is_page()</code>、<code>is_front_page()</code>。</p>
+        <pre><code>if (is_single()) {
+    echo '&lt;p&gt;這是單篇文章頁。&lt;/p&gt;';
+} elseif (is_page()) {
+    echo '&lt;p&gt;這是頁面。&lt;/p&gt;';
+} else {
+    echo '&lt;p&gt;這是其他類型頁面。&lt;/p&gt;';
+}</code></pre>
         <h2 id="sec-5-4">5.4 迴圈指令</h2>
-        <p>PHP 提供 <code>for</code>、<code>while</code>、<code>do...while</code>、<code>foreach</code> 四種迴圈。</p>
-        <p>在 WordPress 中最常見的就是 <strong>The Loop</strong>：<code>while ( have_posts() ) { the_post(); ... }</code>，用於依序輸出文章。</p>
-
+        <p>迴圈用於處理多筆資料。WordPress 最經典的迴圈是 The Loop，用來逐篇輸出查詢到的文章。</p>
+        <pre><code>if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        the_title('&lt;h2&gt;', '&lt;/h2&gt;');
+        the_excerpt();
+    }
+}</code></pre>
+        <h3 id="sec-5-4-1">foreach 處理陣列</h3>
+        <pre><code>$features = ['安全性', '效能', '可維護性'];
+foreach ($features as $feature) {
+    echo '&lt;li&gt;' . esc_html($feature) . '&lt;/li&gt;';
+}</code></pre>
         <h2 id="sec-5-5">5.5 函式的運用</h2>
-        <p>函式 (Function) 是可重複使用的程式碼區塊：<code>function name($arg) { return $value; }</code>。</p>
-        <p>WordPress 內建大量函式如 <code>get_the_title()</code>、<code>the_permalink()</code>、<code>wp_enqueue_script()</code>，是開發必備。</p>
+        <p>函式能把重複邏輯集中管理。WordPress 的 hook 也常需要把自訂函式交給 <code>add_action()</code> 或 <code>add_filter()</code>。</p>
+        <pre><code>function wp2026_format_label($text) {
+    return '[' . trim($text) . ']';
+}
 
+add_filter('the_title', 'wp2026_format_label');</code></pre>
+        <p>撰寫函式時，名稱要避免與 WordPress 核心或其他外掛衝突，實務上常加上專案前綴，例如 <code>wp2026_</code>。</p>
         <h2 id="sec-5-6">5.6 GitHub Copilot 的安裝與使用</h2>
-        <p>GitHub Copilot 是 AI 程式碼助手，可在 VS Code 中即時建議程式碼。</p>
-        <p>本節介紹如何在 VS Code 安裝 Copilot 擴充套件、登入 GitHub 帳號、啟用授權，並示範如何用註解引導 Copilot 撰寫 WordPress 函式。</p>
+        <p>Copilot 可協助補全程式、產生範例與解釋錯誤，但它不理解你的完整專案責任。使用時應先寫清楚註解與函式名稱，再檢查輸出是否符合 WordPress Coding Standards、安全轉義與權限檢查。</p>
+        <h3 id="sec-5-6-1">本章練習</h3>
+        <ol><li>建立一個 PHP 陣列儲存三個課程資料。</li><li>用 <code>foreach</code> 輸出課程清單。</li><li>寫一個函式，把課程標題包成 HTML 標題。</li><li>請 Copilot 產生範例後，手動檢查是否有轉義輸出。</li></ol>
+
+
+
+
 
         <nav class="article-nav">
           <a href="chapter-04.html">
@@ -92,13 +133,17 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                        <ul>
           <li class="level-2"><a href="#sec-5-1">5.1 PHP 程式語言簡介</a></li>
+          <li class="level-3"><a href="#sec-5-1-1">PHP 與 HTML 混寫</a></li>
           <li class="level-2"><a href="#sec-5-2">5.2 變數與基本資料結構</a></li>
+          <li class="level-3"><a href="#sec-5-2-1">關聯陣列與查詢參數</a></li>
           <li class="level-2"><a href="#sec-5-3">5.3 決策指令的應用</a></li>
           <li class="level-2"><a href="#sec-5-4">5.4 迴圈指令</a></li>
+          <li class="level-3"><a href="#sec-5-4-1">foreach 處理陣列</a></li>
           <li class="level-2"><a href="#sec-5-5">5.5 函式的運用</a></li>
           <li class="level-2"><a href="#sec-5-6">5.6 GitHub Copilot 的安裝與使用</a></li>
+          <li class="level-3"><a href="#sec-5-6-1">本章練習</a></li>
         </ul>
       </aside>
     </div>

@@ -53,16 +53,154 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>WordPress 核心至今仍大量使用 jQuery，許多外掛與佈景主題也以 jQuery 撰寫互動效果。本章帶你快速掌握 jQuery 與 AJAX 的基本用法。</p>
+        <p>WordPress 核心與許多既有外掛、佈景主題仍會使用 jQuery 撰寫互動效果。本章的目標不是鼓勵所有新功能都必須使用 jQuery，而是讓你能讀懂、維護並整合 WordPress 生態中常見的 jQuery 與 AJAX 程式。</p>
+
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>理解 jQuery 選擇器、事件、DOM 操作與 WordPress noConflict 寫法，並能用 AJAX 在不重新整理頁面的情況下與伺服器交換資料。</p>
+          </div>
+        </div>
+
         <h2 id="sec-3-1">3.1 jQuery 基礎</h2>
         <p>jQuery 是一個跨瀏覽器的 JavaScript 函式庫，核心精神是「Write less, do more」。</p>
         <p>常用語法：<code>$(selector).action()</code>，例如 <code>$('#title').text('Hello')</code>、<code>$('.btn').on('click', handler)</code>。</p>
-        <p>本節介紹選擇器、事件綁定、動畫效果、操作 DOM 等常用 API。</p>
+
+        <h3 id="sec-3-1-1">在 WordPress 中正確使用 jQuery</h3>
+        <p>WordPress 預設會以 noConflict 模式載入 jQuery，目的是避免 <code>$</code> 符號與其他 JavaScript 函式庫衝突。因此在 WordPress 裡不要直接假設全域 <code>$</code> 一定可用，建議使用下列寫法：</p>
+        <pre><code>jQuery(function ($) {
+  $(".menu-toggle").on("click", function () {
+    $(".nav-links").toggleClass("open");
+  });
+});</code></pre>
+        <p>外層使用 <code>jQuery(function ($) { ... })</code>，代表等 DOM 載入完成後執行，並在函式內安全地把 jQuery 以 <code>$</code> 參數使用。</p>
+
+        <h3 id="sec-3-1-2">選擇器、事件與 DOM 操作</h3>
+        <p>jQuery 的常見工作流程是：選取元素、監聽事件、修改畫面。以下範例會在按鈕被點擊時，切換課程摘要的顯示狀態：</p>
+        <pre><code>&lt;button class="lesson-toggle"&gt;展開課程摘要&lt;/button&gt;
+&lt;div class="lesson-summary" hidden&gt;
+  本章介紹 jQuery 與 AJAX 的基礎用法。
+&lt;/div&gt;
+
+&lt;script&gt;
+jQuery(function ($) {
+  $(".lesson-toggle").on("click", function () {
+    const $summary = $(".lesson-summary");
+    const isHidden = $summary.prop("hidden");
+
+    $summary.prop("hidden", !isHidden);
+    $(this).text(isHidden ? "收合課程摘要" : "展開課程摘要");
+  });
+});
+&lt;/script&gt;</code></pre>
+        <p>常見的 jQuery 方法包含：</p>
+        <ul>
+          <li><code>.text()</code>：讀取或設定文字內容。</li>
+          <li><code>.html()</code>：讀取或設定 HTML 內容，使用時要注意資料是否可信任。</li>
+          <li><code>.addClass()</code>、<code>.removeClass()</code>、<code>.toggleClass()</code>：操作 CSS class。</li>
+          <li><code>.attr()</code> 與 <code>.prop()</code>：操作屬性與布林狀態。</li>
+          <li><code>.on()</code>：監聽事件，例如 click、submit、change。</li>
+        </ul>
+
+        <h3 id="sec-3-1-3">事件委派</h3>
+        <p>如果元素是後來透過 AJAX 動態加入頁面的，直接對元素綁定事件可能會失效。這時可以使用事件委派，把事件綁在較穩定的父層元素上：</p>
+        <pre><code>jQuery(function ($) {
+  $(".lesson-list").on("click", ".lesson-card button", function () {
+    $(this).closest(".lesson-card").toggleClass("is-active");
+  });
+});</code></pre>
+        <p>這種寫法在 WordPress 外掛很常見，特別是前台列表、後台表格或動態載入內容。</p>
 
         <h2 id="sec-3-2">3.2 AJAX 基礎</h2>
         <p>AJAX (Asynchronous JavaScript and XML) 允許網頁在不重新整理的情況下與伺服器交換資料。</p>
         <p>在 WordPress 中，AJAX 請求通常會送到 <code>admin-ajax.php</code> 或 REST API 端點。</p>
-        <p>本節示範 <code>$.ajax()</code>、<code>$.get()</code>、<code>$.post()</code> 的基本用法，以及 WordPress 中常見的 nonce 安全機制。</p>
+
+        <h3 id="sec-3-2-1">AJAX 的基本流程</h3>
+        <p>AJAX 的流程可以分成四步：</p>
+        <ol>
+          <li>使用者觸發事件，例如點擊「載入更多」。</li>
+          <li>JavaScript 送出請求到伺服器。</li>
+          <li>伺服器處理請求並回傳資料，常見格式是 JSON。</li>
+          <li>JavaScript 收到回應後更新畫面。</li>
+        </ol>
+        <p>一般 jQuery AJAX 範例如下：</p>
+        <pre><code>$.ajax({
+  url: "/api/lessons",
+  method: "GET",
+  dataType: "json",
+  success: function (response) {
+    console.log("取得資料", response);
+  },
+  error: function () {
+    console.log("資料載入失敗");
+  }
+});</code></pre>
+
+        <h3 id="sec-3-2-2">WordPress admin-ajax.php 範例</h3>
+        <p>在 WordPress 傳統 AJAX 寫法中，前端會把請求送到 <code>admin-ajax.php</code>，並帶上 <code>action</code> 參數。WordPress 會依照 action 找到對應的 PHP hook。</p>
+        <p>前端 JavaScript 範例：</p>
+        <pre><code>jQuery(function ($) {
+  $(".load-message").on("click", function () {
+    $.post(wp2026Ajax.ajaxUrl, {
+      action: "wp2026_get_message",
+      nonce: wp2026Ajax.nonce
+    }).done(function (response) {
+      $(".message-result").text(response.data.message);
+    }).fail(function () {
+      $(".message-result").text("載入失敗，請稍後再試。");
+    });
+  });
+});</code></pre>
+        <p>對應的 PHP 外掛或主題程式可寫成：</p>
+        <pre><code>add_action('wp_ajax_wp2026_get_message', 'wp2026_get_message');
+add_action('wp_ajax_nopriv_wp2026_get_message', 'wp2026_get_message');
+
+function wp2026_get_message() {
+    check_ajax_referer('wp2026_ajax', 'nonce');
+
+    wp_send_json_success([
+        'message' =&gt; '這是來自 WordPress 的 AJAX 回應。'
+    ]);
+}</code></pre>
+        <p><code>wp_ajax_</code> 用於已登入使用者，<code>wp_ajax_nopriv_</code> 用於未登入訪客。若你的功能只允許登入者使用，可以只註冊 <code>wp_ajax_</code>。</p>
+
+        <h3 id="sec-3-2-3">把 AJAX 參數傳給前端</h3>
+        <p>前端需要知道 <code>admin-ajax.php</code> 的網址與 nonce。常見做法是在載入 JavaScript 檔案後，使用 <code>wp_localize_script()</code> 傳入資料：</p>
+        <pre><code>add_action('wp_enqueue_scripts', 'wp2026_enqueue_scripts');
+
+function wp2026_enqueue_scripts() {
+    wp_enqueue_script(
+        'wp2026-main',
+        get_template_directory_uri() . '/assets/js/main.js',
+        ['jquery'],
+        '1.0.0',
+        true
+    );
+
+    wp_localize_script('wp2026-main', 'wp2026Ajax', [
+        'ajaxUrl' =&gt; admin_url('admin-ajax.php'),
+        'nonce' =&gt; wp_create_nonce('wp2026_ajax'),
+    ]);
+}</code></pre>
+        <p>雖然函式名稱叫 localize，但實務上常被用來把後端資料傳給前端。使用 nonce 可以降低跨站請求偽造風險，但仍應搭配權限檢查與資料驗證。</p>
+
+        <h3 id="sec-3-2-4">安全與錯誤處理</h3>
+        <p>AJAX 功能很容易被忽略安全細節。開發時請記住：</p>
+        <ul>
+          <li>不要相信前端傳來的資料，所有資料都要在 PHP 端驗證與清理。</li>
+          <li>涉及使用者權限的操作，要使用 <code>current_user_can()</code> 檢查能力。</li>
+          <li>前端要處理成功、失敗、載入中三種狀態，避免使用者不知道發生什麼事。</li>
+          <li>回傳 JSON 時優先使用 <code>wp_send_json_success()</code> 與 <code>wp_send_json_error()</code>。</li>
+        </ul>
+
+        <h3 id="sec-3-2-5">本章練習</h3>
+        <ol>
+          <li>建立一個按鈕與結果區塊，按下後用 jQuery 切換 loading 文字。</li>
+          <li>在 WordPress 中註冊一個 AJAX action，回傳一段 JSON 訊息。</li>
+          <li>使用 nonce 保護 AJAX 請求。</li>
+          <li>故意讓請求失敗一次，確認前端有顯示錯誤訊息。</li>
+          <li>思考這個功能如果改用 REST API，URL 與權限檢查會有什麼不同。</li>
+        </ol>
 
         <nav class="article-nav">
           <a href="chapter-02.html">
@@ -80,7 +218,15 @@
         <div class="toc-title">本章節次</div>
         <ul>
           <li class="level-2"><a href="#sec-3-1">3.1 jQuery 基礎</a></li>
+          <li class="level-3"><a href="#sec-3-1-1">在 WordPress 中使用 jQuery</a></li>
+          <li class="level-3"><a href="#sec-3-1-2">選擇器、事件與 DOM 操作</a></li>
+          <li class="level-3"><a href="#sec-3-1-3">事件委派</a></li>
           <li class="level-2"><a href="#sec-3-2">3.2 AJAX 基礎</a></li>
+          <li class="level-3"><a href="#sec-3-2-1">AJAX 的基本流程</a></li>
+          <li class="level-3"><a href="#sec-3-2-2">admin-ajax.php 範例</a></li>
+          <li class="level-3"><a href="#sec-3-2-3">把 AJAX 參數傳給前端</a></li>
+          <li class="level-3"><a href="#sec-3-2-4">安全與錯誤處理</a></li>
+          <li class="level-3"><a href="#sec-3-2-5">本章練習</a></li>
         </ul>
       </aside>
     </div>

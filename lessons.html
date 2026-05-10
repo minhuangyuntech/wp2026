@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="WP2026 完整章節列表 - 16 章 WordPress 教學，從基礎到外掛開發與 AI 活用，可依分類篩選。" />
+  <meta name="description" content="WP2026 完整章節列表 - 16 章 WordPress 教學，從基礎到外掛開發與 AI 活用，包含每章學習重點、實作任務與完成能力。" />
   <title>所有章節 | WP2026</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
   <header class="site-header">
     <div class="container nav">
       <a href="index.html" class="nav-brand">
@@ -25,7 +24,7 @@
       <div class="nav-actions">
         <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
           <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         </button>
         <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -38,13 +37,12 @@
     <div class="container hero-inner">
       <span class="hero-badge">16 個章節 · 完整課程</span>
       <h1 class="hero-title">所有 <span class="highlight">WordPress</span> 教學章節</h1>
-      <p class="hero-subtitle">依教科書順序編排，由基礎觀念到外掛開發與 AI 活用，依下方順序學習效果最佳。</p>
+      <p class="hero-subtitle">依教科書順序編排，由基礎觀念到外掛開發與 AI 活用。每個章節都補上學習重點、實作任務與完成能力，方便安排課堂進度與自主學習。</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-
       <div class="filter-bar" id="filter-bar">
         <button class="filter-btn active" data-filter="all">全部</button>
         <button class="filter-btn" data-filter="beginner">基礎</button>
@@ -52,232 +50,214 @@
         <button class="filter-btn" data-filter="advanced">高階</button>
       </div>
 
-      <div class="modules-grid" id="modules-grid">
-
+      <div class="modules-grid modules-grid-detailed" id="modules-grid">
         <article class="module-card" data-level="beginner" id="beginner">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 01</span>
-            <span class="module-tag tag-beginner">基礎</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 01</span><span class="module-tag tag-beginner">基礎</span></div>
           <h3 class="module-title"><a href="lessons/chapter-01.html" class="module-title-link">WordPress 的安裝與結構剖析</a></h3>
-          <p class="module-desc">WordPress 基礎知識、本地端安裝、網站結構分析。</p>
+          <p class="module-desc">從 WordPress 的角色、安裝方式與目錄結構開始，建立後續主題與外掛開發所需的共同語言。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>理解 WordPress.org、WordPress.com 與 CMS 的差異</li><li>完成本機開發環境與 WordPress 安裝</li><li>辨識 wp-admin、wp-includes、wp-content 與 wp-config.php 的用途</li></ul>
+            <h4>實作任務</h4><p>建立一個本機 WordPress 站台，完成基本設定並記錄主要目錄結構。</p>
+            <h4>完成後你會</h4><p>能獨立建立練習環境，並說明 WordPress 網站由哪些核心資料夾組成。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>觀念 + 實作</span></div>
         </article>
 
         <article class="module-card" data-level="beginner">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 02</span>
-            <span class="module-tag tag-beginner">基礎</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 02</span><span class="module-tag tag-beginner">基礎</span></div>
           <h3 class="module-title"><a href="lessons/chapter-02.html" class="module-title-link">HTML / CSS / JavaScript 基礎</a></h3>
-          <p class="module-desc">前端三大支柱：HTML 標記、CSS 樣式與 JavaScript 互動。</p>
+          <p class="module-desc">快速整理前端三大支柱，讓後續修改佈景主題與撰寫互動效果時有足夠基礎。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>使用語意化 HTML 組織頁面內容</li><li>用 CSS 控制排版、間距、色彩與響應式版面</li><li>以 JavaScript 監聽事件並操作 DOM</li></ul>
+            <h4>實作任務</h4><p>製作一個單頁課程介紹區塊，包含標題、按鈕、卡片與簡單互動效果。</p>
+            <h4>完成後你會</h4><p>能讀懂佈景主題中的 HTML、CSS、JavaScript，並進行小幅修改。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>觀念</span></div>
         </article>
 
         <article class="module-card" data-level="beginner">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 03</span>
-            <span class="module-tag tag-beginner">基礎</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 03</span><span class="module-tag tag-beginner">基礎</span></div>
           <h3 class="module-title"><a href="lessons/chapter-03.html" class="module-title-link">jQuery / AJAX 基礎</a></h3>
-          <p class="module-desc">jQuery 操作 DOM、AJAX 非同步資料傳輸基礎。</p>
+          <p class="module-desc">理解 jQuery 在 WordPress 生態中的常見用途，並學會用 AJAX 交換資料。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>使用 jQuery 選取元素、綁定事件與修改內容</li><li>理解 AJAX 請求、回應與非同步流程</li><li>認識 WordPress 前台互動常見寫法</li></ul>
+            <h4>實作任務</h4><p>做出一個不用重新整理頁面的資料載入按鈕，觀察成功與錯誤狀態。</p>
+            <h4>完成後你會</h4><p>能維護舊有 jQuery 程式，並理解 WordPress 外掛常見的 AJAX 互動模式。</p>
+          </div>
           <div class="module-meta"><span>2 節</span><span>觀念 + 實作</span></div>
         </article>
 
         <article class="module-card" data-level="beginner">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 04</span>
-            <span class="module-tag tag-beginner">基礎</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 04</span><span class="module-tag tag-beginner">基礎</span></div>
           <h3 class="module-title"><a href="lessons/chapter-04.html" class="module-title-link">WordPress 佈景主題基礎</a></h3>
-          <p class="module-desc">WordPress 佈景主題、編輯功能與動手調整佈景主題。</p>
+          <p class="module-desc">從佈景主題的安裝、啟用、客製化與區塊編輯器切入，建立主題操作能力。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>安裝與切換 WordPress 佈景主題</li><li>使用自訂器與站台編輯器調整版面</li><li>了解模板、樣式與內容之間的分工</li></ul>
+            <h4>實作任務</h4><p>挑選一個佈景主題並完成首頁、選單、頁尾與基本視覺設定。</p>
+            <h4>完成後你會</h4><p>能用後台工具完成基礎網站外觀設定，並判斷何時需要進入程式層修改。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>操作</span></div>
         </article>
 
         <article class="module-card" data-level="intermediate" id="intermediate">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 05</span>
-            <span class="module-tag tag-intermediate">進階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 05</span><span class="module-tag tag-intermediate">進階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-05.html" class="module-title-link">PHP 程式語言快速導覽</a></h3>
-          <p class="module-desc">PHP 簡介、變數、決策、迴圈、函式，以及 GitHub Copilot 安裝與使用。</p>
+          <p class="module-desc">補齊 WordPress 開發所需 PHP 語法，涵蓋變數、流程控制、函式與 AI 輔助開發。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>掌握 PHP 變數、陣列、條件、迴圈與函式</li><li>讀懂 WordPress 主題與外掛中的 PHP 片段</li><li>使用 GitHub Copilot 輔助理解與產生程式碼</li></ul>
+            <h4>實作任務</h4><p>撰寫一組 PHP 函式，輸出課程資料並用條件判斷控制顯示內容。</p>
+            <h4>完成後你會</h4><p>能閱讀 WordPress PHP 檔案，並撰寫小型功能片段。</p>
+          </div>
           <div class="module-meta"><span>6 節</span><span>觀念 + 實作</span></div>
         </article>
 
         <article class="module-card" data-level="intermediate">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 06</span>
-            <span class="module-tag tag-intermediate">進階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 06</span><span class="module-tag tag-intermediate">進階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-06.html" class="module-title-link">手工打造佈景主題</a></h3>
-          <p class="module-desc">自訂佈景主題基礎、子佈景主題 (Child Theme) 的運用。</p>
+          <p class="module-desc">從零建立自訂佈景主題，理解必要檔案、模板載入與子佈景主題的實務價值。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>建立 style.css、index.php、functions.php 等主題必要檔案</li><li>理解模板檔案如何組成前台頁面</li><li>使用 Child Theme 保留客製化修改</li></ul>
+            <h4>實作任務</h4><p>建立一個最小可啟用佈景主題，加入文章列表與基本樣式。</p>
+            <h4>完成後你會</h4><p>能從空資料夾建立可運作的 WordPress 佈景主題骨架。</p>
+          </div>
           <div class="module-meta"><span>2 節</span><span>實作</span></div>
         </article>
 
         <article class="module-card" data-level="intermediate">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 07</span>
-            <span class="module-tag tag-intermediate">進階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 07</span><span class="module-tag tag-intermediate">進階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-07.html" class="module-title-link">WordPress 所需的 PHP 程式設計技巧</a></h3>
-          <p class="module-desc">PHP 物件導向基礎與進階、深入分析佈景主題的內容顯示。</p>
+          <p class="module-desc">把 PHP 語法放回 WordPress 場景，理解 Loop、模板標籤與內容輸出流程。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>理解 WordPress Loop 與查詢結果輸出</li><li>使用常見模板標籤顯示文章資訊</li><li>認識物件導向在 WordPress 開發中的用途</li></ul>
+            <h4>實作任務</h4><p>修改主題文章列表，加入分類、日期、摘要與條件式顯示。</p>
+            <h4>完成後你會</h4><p>能追蹤主題如何取得與顯示文章內容，並安全修改輸出邏輯。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>觀念 + 實作</span></div>
         </article>
 
         <article class="module-card" data-level="intermediate">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 08</span>
-            <span class="module-tag tag-intermediate">進階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 08</span><span class="module-tag tag-intermediate">進階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-08.html" class="module-title-link">WordPress 佈景主題製作實例（上）</a></h3>
-          <p class="module-desc">深入探討佈景主題設計、進階佈景主題設計。</p>
+          <p class="module-desc">進入完整主題製作流程，先處理版面拆分、樣式組織與基本模板。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>規劃主題版型與檔案結構</li><li>拆分 header、footer、sidebar 等共用模板</li><li>建立首頁與文章列表的主要版面</li></ul>
+            <h4>實作任務</h4><p>將靜態 HTML 版面轉換成 WordPress 主題模板。</p>
+            <h4>完成後你會</h4><p>能把既有網頁切成 WordPress 主題可使用的模板結構。</p>
+          </div>
           <div class="module-meta"><span>2 節</span><span>實作</span></div>
         </article>
 
         <article class="module-card" data-level="intermediate">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 09</span>
-            <span class="module-tag tag-intermediate">進階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 09</span><span class="module-tag tag-intermediate">進階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-09.html" class="module-title-link">WordPress 佈景主題製作實例（下）</a></h3>
-          <p class="module-desc">WP_Query 類別、其他頁面模板的設計與其他進階主題。</p>
+          <p class="module-desc">延伸主題實作，加入 WP_Query、自訂頁面模板與更完整的內容呈現。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>使用 WP_Query 建立自訂文章列表</li><li>製作分類、單篇文章與頁面模板</li><li>處理分頁、查無資料與條件式版面</li></ul>
+            <h4>實作任務</h4><p>建立一個課程文章列表頁，支援指定分類與分頁顯示。</p>
+            <h4>完成後你會</h4><p>能完成更接近真實專案需求的 WordPress 主題頁面。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>實作</span></div>
         </article>
 
         <article class="module-card" data-level="advanced" id="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 10</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 10</span><span class="module-tag tag-advanced">高階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-10.html" class="module-title-link">佈景主題進階開發工具</a></h3>
-          <p class="module-desc">Underscores 佈景主題、Sage 簡介與使用。</p>
+          <p class="module-desc">認識 Underscores 與 Sage 等開發工具，理解現代主題開發流程。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>使用 Underscores 快速產生主題起始架構</li><li>理解 Sage 的現代化建置與模板概念</li><li>比較傳統主題與現代化工具鏈的取捨</li></ul>
+            <h4>實作任務</h4><p>產生一份 starter theme，檢視其檔案分工並調整基本樣式。</p>
+            <h4>完成後你會</h4><p>能依專案規模選擇合適的主題開發起點。</p>
+          </div>
           <div class="module-meta"><span>2 節</span><span>工具</span></div>
         </article>
 
         <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 11</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 11</span><span class="module-tag tag-advanced">高階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-11.html" class="module-title-link">WordPress 外掛開發基礎</a></h3>
-          <p class="module-desc">外掛入門、Hooks 簡介與應用、過濾文章內容範例。</p>
+          <p class="module-desc">從外掛檔頭、啟用流程、Hooks 機制開始，建立外掛開發的核心模型。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>建立可啟用的 WordPress 外掛</li><li>理解 Action 與 Filter 的差異</li><li>使用 Hook 修改文章內容或加入自訂行為</li></ul>
+            <h4>實作任務</h4><p>製作一個在文章結尾自動加入提示文字的外掛。</p>
+            <h4>完成後你會</h4><p>能撰寫小型外掛，並知道如何把功能掛到 WordPress 執行流程。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>實作</span></div>
         </article>
 
         <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 12</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 12</span><span class="module-tag tag-advanced">高階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-12.html" class="module-title-link">外掛選項設定頁設計</a></h3>
-          <p class="module-desc">外掛在控制台中的操作、Shortcode 短代碼的應用。</p>
+          <p class="module-desc">學習在後台建立設定頁、保存選項，並用 Shortcode 將外掛功能放到前台。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>建立管理後台選單與設定頁</li><li>使用 Options API 儲存外掛設定</li><li>撰寫 Shortcode 輸出前台內容</li></ul>
+            <h4>實作任務</h4><p>製作一個可在後台設定文字、再用短代碼輸出的提示區塊外掛。</p>
+            <h4>完成後你會</h4><p>能做出具備後台設定介面的 WordPress 外掛。</p>
+          </div>
           <div class="module-meta"><span>2 節</span><span>實作</span></div>
         </article>
 
         <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 13</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 13</span><span class="module-tag tag-advanced">高階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-13.html" class="module-title-link">實用外掛設計與小工具的製作</a></h3>
-          <p class="module-desc">計數器外掛介紹與實作、建立小工具 (Widget)。</p>
+          <p class="module-desc">把外掛功能延伸到 Widget 與實用元件，練習較完整的功能封裝。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>規劃計數器外掛的資料與流程</li><li>建立可重複使用的小工具 Widget</li><li>處理前台顯示與後台設定欄位</li></ul>
+            <h4>實作任務</h4><p>完成一個可放在側邊欄的統計或提示小工具。</p>
+            <h4>完成後你會</h4><p>能設計可安裝、可設定、可嵌入版面的功能型外掛。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>實作</span></div>
         </article>
 
         <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 14</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 14</span><span class="module-tag tag-advanced">高階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-14.html" class="module-title-link">Custom Post Type 的應用</a></h3>
-          <p class="module-desc">自定義貼文類型外掛介紹、在外掛中建立 Custom Post Type。</p>
+          <p class="module-desc">學會建立自訂內容類型，讓 WordPress 不只管理文章，也能管理作品、商品或課程。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>理解 Custom Post Type 適用情境</li><li>用 register_post_type 建立自訂內容類型</li><li>設定後台欄位、網址與前台顯示</li></ul>
+            <h4>實作任務</h4><p>建立一個「課程」或「作品」CPT，並在前台列出資料。</p>
+            <h4>完成後你會</h4><p>能把 WordPress 擴充為符合專案需求的內容管理系統。</p>
+          </div>
           <div class="module-meta"><span>2 節</span><span>實作</span></div>
         </article>
 
         <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 15</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 15</span><span class="module-tag tag-advanced">高階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-15.html" class="module-title-link">實用商品列表外掛</a></h3>
-          <p class="module-desc">商品列表外掛規劃及設計、儲存自訂資料、顯示商品列表。</p>
+          <p class="module-desc">以商品列表作為整合專案，串起 CPT、後台欄位、資料儲存與前台輸出。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>規劃商品資料欄位與管理流程</li><li>儲存與讀取自訂欄位資料</li><li>建立商品列表與單一商品顯示</li></ul>
+            <h4>實作任務</h4><p>完成一個可新增商品、填寫價格與描述、並在前台列表呈現的外掛。</p>
+            <h4>完成後你會</h4><p>能完成一個具備實務雛形的 WordPress 外掛專案。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>專案</span></div>
         </article>
 
         <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 16</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
+          <div class="module-header"><span class="module-num">CHAPTER 16</span><span class="module-tag tag-advanced">高階</span></div>
           <h3 class="module-title"><a href="lessons/chapter-16.html" class="module-title-link">進階主題與活用 AI</a></h3>
-          <p class="module-desc">WordPress 演進趨勢、網站備份與搬家、ChatGPT 活用術。</p>
+          <p class="module-desc">收束課程，補充 WordPress 趨勢、備份搬站、安全維護與 ChatGPT 輔助開發方法。</p>
+          <div class="module-detail">
+            <h4>學習重點</h4>
+            <ul><li>理解 WordPress 最新發展與區塊化趨勢</li><li>掌握網站備份、搬家與維護注意事項</li><li>使用 ChatGPT 協助除錯、產生範例與撰寫文件</li></ul>
+            <h4>實作任務</h4><p>整理一份網站交付檢查表，並用 AI 協助產生維護說明。</p>
+            <h4>完成後你會</h4><p>能把開發技能轉化為可維護、可交付的 WordPress 專案流程。</p>
+          </div>
           <div class="module-meta"><span>3 節</span><span>觀念</span></div>
         </article>
-
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="index.html" class="nav-brand">
-            <span class="nav-logo">W</span>
-            <span>WP2026</span>
-          </a>
-          <p>2026 年最新版本的 WordPress 完整教學課程，由 minhuangyuntech 製作。</p>
-        </div>
-        <div class="footer-col">
-          <h4>章節</h4>
-          <ul>
-            <li><a href="lessons.html">所有章節</a></li>
-            <li><a href="lessons.html#beginner">基礎章節</a></li>
-            <li><a href="lessons.html#intermediate">進階章節</a></li>
-            <li><a href="lessons.html#advanced">高階章節</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>資源</h4>
-          <ul>
-            <li><a href="https://wordpress.org/" target="_blank" rel="noopener">WordPress.org</a></li>
-            <li><a href="https://developer.wordpress.org/" target="_blank" rel="noopener">Developer Docs</a></li>
-            <li><a href="https://github.com/minhuangyuntech" target="_blank" rel="noopener">GitHub</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © <span id="current-year">2026</span> minhuangyuntech · WP2026
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-</body>
-</html>
-an></div>
-        </article>
-
-        <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 15</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
-          <h3 class="module-title"><a href="lessons/chapter-15.html" class="module-title-link">實用商品列表外掛</a></h3>
-          <p class="module-desc">商品列表外掛規劃及設計、儲存自訂資料、顯示商品列表。</p>
-          <div class="module-meta"><span>3 節</span><span>專案</span></div>
-        </article>
-
-        <article class="module-card" data-level="advanced">
-          <div class="module-header">
-            <span class="module-num">CHAPTER 16</span>
-            <span class="module-tag tag-advanced">高階</span>
-          </div>
-          <h3 class="module-title"><a href="lessons/chapter-16.html" class="module-title-link">進階主題與活用 AI</a></h3>
-          <p class="module-desc">WordPress 演進趨勢、網站備份與搬家、ChatGPT 活用術。</p>
-          <div class="module-meta"><span>3 節</span><span>觀念</span></div>
-        </article>
-
       </div>
     </div>
   </section>

@@ -53,19 +53,126 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>本章將帶你建立對 WordPress 的整體認識，並動手在本地端安裝一套 WordPress 網站，最後深入剖析 WordPress 的目錄結構，為後續開發打下穩固的基礎。</p>
+        <p>本章將帶你建立對 WordPress 的整體認識，並動手在本地端安裝一套 WordPress 網站，最後深入剖析 WordPress 的目錄結構，為後續佈景主題與外掛開發打下穩固基礎。學完本章後，你應該能說明 WordPress 如何運作、如何建立安全的練習環境，以及哪些檔案可以修改、哪些檔案應該避免碰觸。</p>
+
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>理解 WordPress 的定位、完成本機開發環境安裝，並能辨識 <code>wp-content</code>、<code>themes</code>、<code>plugins</code>、<code>uploads</code>、<code>wp-config.php</code> 等核心位置。</p>
+          </div>
+        </div>
+
         <h2 id="sec-1-1">1.1 WordPress 網站的基礎知識</h2>
-        <p>WordPress 是目前全世界市佔率最高的 <strong>內容管理系統 (Content Management System, CMS)</strong>，依 W3Techs 統計，全球約 <strong>43%</strong> 的網站使用 WordPress。</p>
-        <p>本節介紹 WordPress 的歷史、開源 (GPL) 授權、WordPress.org 與 WordPress.com 的差異，並說明為什麼 WordPress 適合作為你的第一個網站平台。</p>
+        <p>WordPress 是一套開源的 <strong>內容管理系統 (Content Management System, CMS)</strong>。CMS 的重點不是「做出一頁網頁」，而是讓使用者能長期管理文章、頁面、圖片、分類、選單、使用者權限與網站外觀。當網站內容會持續更新時，CMS 會比純手寫 HTML 更容易維護。</p>
+
+        <h3 id="sec-1-1-1">WordPress 適合解決什麼問題</h3>
+        <p>WordPress 最初以部落格系統起家，但現在已能支援公司形象網站、教學網站、作品集、新聞站、會員網站、電商網站與各種內容管理需求。它的核心價值在於把「內容」、「外觀」與「功能」分開管理：</p>
+        <ul>
+          <li><strong>內容</strong>：文章、頁面、媒體、分類、標籤與留言。</li>
+          <li><strong>外觀</strong>：由佈景主題控制，例如版型、字體、色彩、頁首與頁尾。</li>
+          <li><strong>功能</strong>：由外掛擴充，例如表單、SEO、快取、備份、會員與商品管理。</li>
+        </ul>
+        <p>這種分工讓非工程背景的網站管理者可以透過後台更新內容，而開發者則可以專注在主題、外掛與資料結構的客製化。</p>
+
+        <h3 id="sec-1-1-2">WordPress.org 與 WordPress.com</h3>
+        <p>學習開發時，最容易混淆的是 WordPress.org 與 WordPress.com。兩者都與 WordPress 有關，但定位不同：</p>
+        <ul>
+          <li><strong>WordPress.org</strong>：提供可自行下載、安裝與修改的開源 WordPress 程式。開發課程通常指的是這一種。</li>
+          <li><strong>WordPress.com</strong>：提供代管服務，使用者不需要自行架設伺服器，但可客製化範圍會依方案不同而受限制。</li>
+        </ul>
+        <p>本課程以 WordPress.org 版本為主，因為它最適合學習主題、外掛、資料庫與部署流程。</p>
+
+        <h3 id="sec-1-1-3">開發者應具備的觀念</h3>
+        <p>WordPress 雖然可以用後台完成許多事情，但一旦要進行客製化，就必須理解它的執行流程。當瀏覽器請求某個網址時，WordPress 會讀取設定、連接資料庫、判斷要顯示哪種內容，再載入對應的主題模板輸出 HTML。</p>
+        <p>你可以先把 WordPress 想成三層：</p>
+        <ol>
+          <li><strong>核心程式</strong>：負責登入、權限、資料庫查詢、路由與後台管理。</li>
+          <li><strong>佈景主題</strong>：負責前台畫面與內容呈現方式。</li>
+          <li><strong>外掛</strong>：負責新增或修改功能。</li>
+        </ol>
+        <p>好的開發習慣是：不要直接修改 WordPress 核心檔案，而是透過佈景主題、子佈景主題或外掛完成客製化。</p>
 
         <h2 id="sec-1-2">1.2 在本地端安裝 WordPress 網站</h2>
-        <p>本地端開發是學習 WordPress 最安全、最快速的方式。本節介紹如何使用 <strong>Local</strong>、<strong>XAMPP</strong> 或 <strong>Docker</strong> 建立本地 WordPress 環境。</p>
-        <p>完整步驟：下載安裝程式 → 建立站台 → 設定 PHP / MySQL 版本 → 完成 WordPress 安裝精靈 → 登入後台。</p>
+        <p>本地端開發是學習 WordPress 最安全、最快速的方式。你可以在自己的電腦上嘗試安裝外掛、修改主題、測試 PHP 程式，即使網站出錯也不會影響正式網站。</p>
+
+        <h3 id="sec-1-2-1">選擇本機開發工具</h3>
+        <p>WordPress 需要 PHP、資料庫與 Web Server。初學者不必一開始就手動安裝所有元件，可以選擇整合工具：</p>
+        <ul>
+          <li><strong>Local</strong>：最適合初學者，圖形介面清楚，能快速建立 WordPress 站台。</li>
+          <li><strong>XAMPP</strong>：適合想理解 Apache、PHP、MySQL 如何搭配運作的學習者。</li>
+          <li><strong>Docker</strong>：適合進階使用者，可用設定檔重現開發環境。</li>
+        </ul>
+        <p>如果這是你的第一個 WordPress 開發環境，建議先使用 Local。等你理解 WordPress 結構後，再回頭學 XAMPP 或 Docker 會更順。</p>
+
+        <h3 id="sec-1-2-2">使用 Local 建立站台</h3>
+        <p>以 Local 為例，建立本機 WordPress 網站可以依照下列流程：</p>
+        <ol>
+          <li>下載並安裝 Local。</li>
+          <li>建立新站台，輸入站台名稱，例如 <code>wp2026-practice</code>。</li>
+          <li>選擇開發環境。初學時可使用 Preferred 設定。</li>
+          <li>設定 WordPress 管理員帳號、密碼與電子郵件。</li>
+          <li>等待 Local 建立 PHP、資料庫與 WordPress 檔案。</li>
+          <li>按下 Open site 查看前台，按下 WP Admin 登入後台。</li>
+        </ol>
+
+        <div class="callout callout-warning">
+          <div class="callout-content">
+            <div class="callout-title">密碼與練習資料</div>
+            <p>本機站台仍建議使用不容易猜到的密碼。練習時也不要把真實個資、正式 API key 或客戶資料放進本機範例專案。</p>
+          </div>
+        </div>
+
+        <h3 id="sec-1-2-3">安裝後的基本設定</h3>
+        <p>登入後台後，建議先檢查幾個基本設定。這些設定會影響後續練習的網址、內容顯示與除錯方式：</p>
+        <ul>
+          <li>在「設定 → 一般」確認網站標題與時區。</li>
+          <li>在「設定 → 固定網址」選擇「文章名稱」，讓網址更接近實務網站。</li>
+          <li>新增一篇測試文章與一個測試頁面，確認前台能正確顯示。</li>
+          <li>上傳一張測試圖片，觀察媒體檔案如何被保存。</li>
+        </ul>
+        <p>若你是使用 Local，可以從站台資料夾進入 WordPress 檔案目錄；若是 XAMPP，常見位置會在 <code>htdocs</code> 底下。</p>
 
         <h2 id="sec-1-3">1.3 WordPress 網站結構分析</h2>
         <p>WordPress 安裝完成後，目錄裡可看到三個重要的子資料夾：<code>wp-admin</code>、<code>wp-includes</code> 與 <code>wp-content</code>。</p>
-        <p>其中 <code>wp-content</code> 是開發者最常接觸的資料夾，它包含 <code>themes</code>（佈景主題）、<code>plugins</code>（外掛）、<code>uploads</code>（媒體檔案）等子目錄。</p>
-        <p>另一個關鍵檔案是 <code>wp-config.php</code>，內含資料庫連線設定、加密金鑰、Debug 模式開關等重要配置。</p>
+
+        <h3 id="sec-1-3-1">核心目錄與用途</h3>
+        <pre><code>wordpress/
+├── wp-admin/
+├── wp-includes/
+├── wp-content/
+│   ├── themes/
+│   ├── plugins/
+│   └── uploads/
+├── wp-config.php
+├── index.php
+└── .htaccess</code></pre>
+        <ul>
+          <li><code>wp-admin</code>：後台管理介面相關檔案，通常不應直接修改。</li>
+          <li><code>wp-includes</code>：WordPress 核心函式庫與類別，通常不應直接修改。</li>
+          <li><code>wp-content</code>：開發者最常接觸的位置，主題、外掛、上傳檔案都在這裡。</li>
+          <li><code>wp-config.php</code>：資料庫連線、除錯模式、金鑰與重要常數設定。</li>
+          <li><code>.htaccess</code>：Apache 環境常見設定檔，固定網址規則通常會寫在這裡。</li>
+        </ul>
+
+        <h3 id="sec-1-3-2">wp-content 是開發主戰場</h3>
+        <p>學習 WordPress 開發時，大部分修改都會發生在 <code>wp-content</code>。其中 <code>themes</code> 放佈景主題，控制網站前台畫面；<code>plugins</code> 放外掛，負責功能擴充；<code>uploads</code> 放媒體檔案，通常由後台上傳自動產生。</p>
+        <p>如果你要修改網站外觀，應該優先尋找目前啟用的主題。如果你要新增一段功能，例如短代碼、表單處理或後台設定頁，通常應該寫成外掛。</p>
+
+        <h3 id="sec-1-3-3">wp-config.php 與除錯模式</h3>
+        <p><code>wp-config.php</code> 是 WordPress 啟動時會讀取的重要設定檔。初學者最常接觸的是資料庫設定與除錯模式。開發階段可以打開除錯，讓錯誤訊息更容易被發現：</p>
+        <pre><code>define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);</code></pre>
+        <p>這組設定會把錯誤記錄到 <code>wp-content/debug.log</code>，同時避免錯誤直接顯示在前台頁面。正式網站是否開啟除錯要非常謹慎，避免暴露檔案路徑或敏感資訊。</p>
+
+        <h3 id="sec-1-3-4">本章練習</h3>
+        <ol>
+          <li>建立一個本機 WordPress 站台，設定網站標題為「WP2026 練習站」。</li>
+          <li>新增一篇文章、一個頁面與一張圖片。</li>
+          <li>找到目前啟用的佈景主題資料夾，記錄它位於哪個路徑。</li>
+          <li>打開 <code>wp-content</code>，列出 <code>themes</code>、<code>plugins</code>、<code>uploads</code> 的用途。</li>
+          <li>說明為什麼不應直接修改 <code>wp-admin</code> 與 <code>wp-includes</code>。</li>
+        </ol>
 
         <nav class="article-nav">
           <a href="../lessons.html">
@@ -83,8 +190,18 @@
         <div class="toc-title">本章節次</div>
         <ul>
           <li class="level-2"><a href="#sec-1-1">1.1 WordPress 網站的基礎知識</a></li>
+          <li class="level-3"><a href="#sec-1-1-1">WordPress 適合解決什麼問題</a></li>
+          <li class="level-3"><a href="#sec-1-1-2">WordPress.org 與 WordPress.com</a></li>
+          <li class="level-3"><a href="#sec-1-1-3">開發者應具備的觀念</a></li>
           <li class="level-2"><a href="#sec-1-2">1.2 在本地端安裝 WordPress 網站</a></li>
+          <li class="level-3"><a href="#sec-1-2-1">選擇本機開發工具</a></li>
+          <li class="level-3"><a href="#sec-1-2-2">使用 Local 建立站台</a></li>
+          <li class="level-3"><a href="#sec-1-2-3">安裝後的基本設定</a></li>
           <li class="level-2"><a href="#sec-1-3">1.3 WordPress 網站結構分析</a></li>
+          <li class="level-3"><a href="#sec-1-3-1">核心目錄與用途</a></li>
+          <li class="level-3"><a href="#sec-1-3-2">wp-content 是開發主戰場</a></li>
+          <li class="level-3"><a href="#sec-1-3-3">wp-config.php 與除錯模式</a></li>
+          <li class="level-3"><a href="#sec-1-3-4">本章練習</a></li>
         </ul>
       </aside>
     </div>

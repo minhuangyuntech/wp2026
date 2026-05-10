@@ -53,20 +53,54 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>外掛 (Plugin) 是擴充 WordPress 功能的標準方式。本章從零開始，帶你建立第一個自己的外掛。</p>
+                <p>外掛是 WordPress 擴充功能的主要方式。當功能不應該跟著主題一起消失，就應該考慮寫成外掛。本章從最小外掛開始，介紹外掛檔頭、啟用、Hook 與內容過濾範例。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能建立可啟用的外掛，理解 Action 與 Filter，並用外掛修改文章內容。</p>
+          </div>
+        </div>
         <h2 id="sec-11-1">11.1 WordPress 外掛入門</h2>
-        <p>一個最簡單的外掛只需要一個 PHP 檔案，並在開頭加上 Plugin 標頭註解：<code>/* Plugin Name: My Plugin */</code>。</p>
-        <p>把檔案放到 <code>wp-content/plugins/my-plugin/my-plugin.php</code>，後台「外掛」頁面就能看到並啟用。</p>
-
+        <p>外掛至少需要一個 PHP 檔案與外掛檔頭。放在 <code>wp-content/plugins</code> 後，WordPress 會讀取檔頭並顯示在外掛列表。</p>
+        <pre><code>&lt;?php
+/*
+Plugin Name: WP2026 Demo Plugin
+Description: 課程示範外掛。
+Version: 1.0.0
+Author: minhuangyuntech
+*/</code></pre>
+        <h3 id="sec-11-1-1">外掛與主題的分工</h3>
+        <p>主題負責外觀，外掛負責功能。若功能與網站資料、商業邏輯、後台管理或 API 有關，通常應放在外掛。</p>
         <h2 id="sec-11-2">11.2 Hooks 簡介與應用</h2>
-        <p>Hooks 是 WordPress 的擴充機制，分為兩種：</p>
-        <p><strong>Action</strong>：在某個時機執行你的函式，例如 <code>add_action('init', 'my_init')</code>。</p>
-        <p><strong>Filter</strong>：修改某個資料後再回傳，例如 <code>add_filter('the_content', 'my_filter')</code>。</p>
-        <p>理解 Hooks 是 WordPress 開發的核心技能。</p>
-
+        <p>Hook 是 WordPress 的擴充機制。Action 用來在特定時間點執行動作，Filter 用來接收資料、修改後再回傳。</p>
+        <h3 id="sec-11-2-1">Action 範例</h3>
+        <pre><code>add_action('wp_footer', 'wp2026_footer_note');
+function wp2026_footer_note() {
+    echo '&lt;div class="wp2026-note"&gt;感謝閱讀 WP2026&lt;/div&gt;';
+}</code></pre>
+        <h3 id="sec-11-2-2">Filter 範例</h3>
+        <pre><code>add_filter('the_content', 'wp2026_append_message');
+function wp2026_append_message($content) {
+    if (is_single()) {
+        $content .= '&lt;p&gt;本文由 WP2026 外掛加入。&lt;/p&gt;';
+    }
+    return $content;
+}</code></pre>
         <h2 id="sec-11-3">11.3 使用外掛過濾文章的內容範例</h2>
-        <p>本節以「在每篇文章末尾加上版權聲明」為例，示範如何使用 <code>the_content</code> filter 修改文章輸出。</p>
-        <p>完整外掛只需要約 15 行 PHP，是學習 Filter 的最佳起點。</p>
+        <p>過濾文章內容時要注意只在合適頁面執行，並避免影響後台、摘要或 REST API 回應。</p>
+        <h3 id="sec-11-3-1">加入條件與安全輸出</h3>
+        <pre><code>function wp2026_append_course_cta($content) {
+    if (!is_singular('post') || !in_the_loop() || !is_main_query()) {
+        return $content;
+    }
+    $cta = '&lt;aside class="course-cta"&gt;繼續學習下一章&lt;/aside&gt;';
+    return $content . $cta;
+}
+add_filter('the_content', 'wp2026_append_course_cta');</code></pre>
+        <h3 id="sec-11-3-2">本章練習</h3>
+        <ol><li>建立一個可啟用外掛。</li><li>在文章結尾加入課程提示區塊。</li><li>限制提示只出現在單篇文章頁。</li><li>停用外掛並確認提示消失。</li></ol>
+
+
 
         <nav class="article-nav">
           <a href="chapter-10.html">
@@ -82,10 +116,15 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                <ul>
           <li class="level-2"><a href="#sec-11-1">11.1 WordPress 外掛入門</a></li>
+          <li class="level-3"><a href="#sec-11-1-1">外掛與主題的分工</a></li>
           <li class="level-2"><a href="#sec-11-2">11.2 Hooks 簡介與應用</a></li>
-          <li class="level-2"><a href="#sec-11-3">11.3 使用外掛過濾文章的內容範例</a></li>
+          <li class="level-3"><a href="#sec-11-2-1">Action 範例</a></li>
+          <li class="level-3"><a href="#sec-11-2-2">Filter 範例</a></li>
+          <li class="level-2"><a href="#sec-11-3">11.3 過濾文章內容範例</a></li>
+          <li class="level-3"><a href="#sec-11-3-1">加入條件與安全輸出</a></li>
+          <li class="level-3"><a href="#sec-11-3-2">本章練習</a></li>
         </ul>
       </aside>
     </div>

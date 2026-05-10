@@ -53,16 +53,45 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>好的外掛應該讓使用者能透過後台介面調整設定。本章介紹如何在控制台中加入外掛選單、設定頁，並學習實用的 Shortcode 短代碼。</p>
+                <p>許多外掛需要讓管理者在後台調整設定，或讓使用者透過短代碼把功能放進文章與頁面。本章介紹設定頁、Options API 與 Shortcode 的基本設計。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能建立後台設定頁、儲存選項，並撰寫 Shortcode 在前台輸出可重用內容。</p>
+          </div>
+        </div>
         <h2 id="sec-12-1">12.1 外掛在控制台中的操作</h2>
-        <p>使用 <code>add_menu_page()</code> 與 <code>add_submenu_page()</code> 在後台側邊欄加入外掛選單。</p>
-        <p>搭配 <code>register_setting()</code>、<code>add_settings_section()</code>、<code>add_settings_field()</code> 三個 Settings API 函式建立標準的設定頁。</p>
-        <p>資料則使用 <code>get_option()</code> 讀取、<code>update_option()</code> 寫入。</p>
-
+        <p>設定頁通常會掛在後台選單中。建立設定頁時，要檢查使用者權限，並讓輸入資料經過清理。</p>
+        <h3 id="sec-12-1-1">加入後台選單</h3>
+        <pre><code>add_action('admin_menu', 'wp2026_register_settings_page');
+function wp2026_register_settings_page() {
+    add_options_page(
+        'WP2026 設定',
+        'WP2026 設定',
+        'manage_options',
+        'wp2026-settings',
+        'wp2026_render_settings_page'
+    );
+}</code></pre>
+        <h3 id="sec-12-1-2">儲存選項</h3>
+        <p>簡單外掛可使用 <code>get_option()</code> 與 <code>update_option()</code>。資料寫入前要使用 <code>sanitize_text_field()</code> 等函式清理。</p>
+        <pre><code>$message = isset($_POST['message'])
+    ? sanitize_text_field(wp_unslash($_POST['message']))
+    : '';
+update_option('wp2026_message', $message);</code></pre>
         <h2 id="sec-12-2">12.2 短代碼 shortcode 的應用</h2>
-        <p>Shortcode 讓使用者能在文章中插入動態內容，例如 <code>[my_button text="Hello"]</code>。</p>
-        <p>註冊：<code>add_shortcode('my_button', 'render_my_button');</code>。</p>
-        <p>Shortcode 函式接受屬性 (attributes) 與內容 (content) 參數，回傳 HTML 字串。</p>
+        <p>Shortcode 讓使用者在文章或頁面中插入外掛輸出，例如 <code>[wp2026_message]</code>。它適合簡短、可重用、由內容編輯者自行放置的功能。</p>
+        <h3 id="sec-12-2-1">建立 Shortcode</h3>
+        <pre><code>add_shortcode('wp2026_message', 'wp2026_message_shortcode');
+function wp2026_message_shortcode($atts) {
+    $atts = shortcode_atts(['type' =&gt; 'info'], $atts);
+    $message = get_option('wp2026_message', '歡迎學習 WP2026');
+    return '&lt;div class="notice notice-' . esc_attr($atts['type']) . '"&gt;' . esc_html($message) . '&lt;/div&gt;';
+}</code></pre>
+        <h3 id="sec-12-2-2">本章練習</h3>
+        <ol><li>建立一個外掛設定頁。</li><li>儲存一段自訂提示文字。</li><li>建立 <code>[wp2026_message]</code> 短代碼。</li><li>在頁面中插入短代碼並確認輸出。</li></ol>
+
+
 
         <nav class="article-nav">
           <a href="chapter-11.html">
@@ -78,9 +107,13 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                <ul>
           <li class="level-2"><a href="#sec-12-1">12.1 外掛在控制台中的操作</a></li>
+          <li class="level-3"><a href="#sec-12-1-1">加入後台選單</a></li>
+          <li class="level-3"><a href="#sec-12-1-2">儲存選項</a></li>
           <li class="level-2"><a href="#sec-12-2">12.2 短代碼 shortcode 的應用</a></li>
+          <li class="level-3"><a href="#sec-12-2-1">建立 Shortcode</a></li>
+          <li class="level-3"><a href="#sec-12-2-2">本章練習</a></li>
         </ul>
       </aside>
     </div>

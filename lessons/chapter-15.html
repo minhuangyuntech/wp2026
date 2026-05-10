@@ -53,18 +53,51 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>綜合應用前面所學，本章從零打造一個「商品列表」外掛：包含 CPT、自訂欄位、Shortcode 顯示，是一個完整的小型專案。</p>
+                <p>本章以「商品列表外掛」作為整合專案，把 CPT、自訂欄位、資料儲存與前台列表串起來。完成後你會具備開發小型內容管理外掛的實務雛形。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能規劃商品資料結構，儲存自訂欄位，並用 shortcode 或模板顯示商品列表。</p>
+          </div>
+        </div>
         <h2 id="sec-15-1">15.1 商品列表外掛的規劃及設計</h2>
-        <p>需求分析：建立「product」CPT、儲存商品名稱、價格、圖片、描述；提供 Shortcode 在任何頁面顯示商品列表。</p>
-        <p>資料庫規劃：使用 <code>posts</code> 儲存基本資料，<code>postmeta</code> 儲存價格等自訂欄位。</p>
-
+        <p>商品列表至少需要商品名稱、描述、價格、圖片與狀態。若只是展示商品，可用 CPT 加自訂欄位；若要購物車、付款與訂單，應評估 WooCommerce 等成熟方案。</p>
+        <h3 id="sec-15-1-1">資料欄位規劃</h3>
+        <ul><li>商品名稱：使用 CPT 標題。</li><li>商品描述：使用內容編輯器。</li><li>商品圖片：使用精選圖片。</li><li>價格與 SKU：使用 post meta。</li><li>商品分類：使用 taxonomy。</li></ul>
         <h2 id="sec-15-2">15.2 儲存自訂資料</h2>
-        <p>在 CPT 編輯頁面加入 Meta Box，提供「價格」「庫存」等欄位輸入框。</p>
-        <p>使用 <code>add_meta_box()</code> 註冊；表單送出時透過 <code>save_post</code> 鉤點驗證 nonce 並寫入 postmeta。</p>
-
+        <p>自訂欄位可透過 meta box 或區塊編輯器側欄建立。儲存時要檢查 nonce、權限與自動儲存狀態。</p>
+        <pre><code>function wp2026_save_product_meta($post_id) {
+    if (defined('DOING_AUTOSAVE') &amp;&amp; DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+    $price = isset($_POST['wp2026_price']) ? sanitize_text_field(wp_unslash($_POST['wp2026_price'])) : '';
+    update_post_meta($post_id, '_wp2026_price', $price);
+}</code></pre>
+        <h3 id="sec-15-2-1">資料驗證</h3>
+        <p>價格應檢查是否為數字，網址應使用 <code>esc_url_raw()</code>，純文字使用 <code>sanitize_text_field()</code>。儲存前清理，輸出前仍要轉義。</p>
         <h2 id="sec-15-3">15.3 顯示商品列表</h2>
-        <p>註冊 <code>[product_list]</code> Shortcode，內部使用 <code>WP_Query</code> 查詢所有 product。</p>
-        <p>在 Loop 中輸出每個商品的縮圖、名稱、價格與描述，並套上響應式 CSS Grid 排版。</p>
+        <p>前台可用 shortcode 顯示商品列表，讓管理者可以把列表放到任意頁面。</p>
+        <pre><code>add_shortcode('wp2026_products', 'wp2026_products_shortcode');
+function wp2026_products_shortcode() {
+    $query = new WP_Query(['post_type' =&gt; 'product', 'posts_per_page' =&gt; 12]);
+    ob_start();
+    if ($query-&gt;have_posts()) {
+        echo '&lt;div class="product-grid"&gt;';
+        while ($query-&gt;have_posts()) {
+            $query-&gt;the_post();
+            echo '&lt;article class="product-card"&gt;';
+            the_title('&lt;h3&gt;', '&lt;/h3&gt;');
+            echo esc_html(get_post_meta(get_the_ID(), '_wp2026_price', true));
+            echo '&lt;/article&gt;';
+        }
+        echo '&lt;/div&gt;';
+    }
+    wp_reset_postdata();
+    return ob_get_clean();
+}</code></pre>
+        <h3 id="sec-15-3-1">本章練習</h3>
+        <ol><li>建立 product CPT。</li><li>新增價格自訂欄位。</li><li>建立 <code>[wp2026_products]</code> 短代碼。</li><li>用 CSS 設計商品卡片列表。</li></ol>
+
+
 
         <nav class="article-nav">
           <a href="chapter-14.html">
@@ -80,10 +113,13 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                <ul>
           <li class="level-2"><a href="#sec-15-1">15.1 商品列表外掛的規劃及設計</a></li>
+          <li class="level-3"><a href="#sec-15-1-1">資料欄位規劃</a></li>
           <li class="level-2"><a href="#sec-15-2">15.2 儲存自訂資料</a></li>
+          <li class="level-3"><a href="#sec-15-2-1">資料驗證</a></li>
           <li class="level-2"><a href="#sec-15-3">15.3 顯示商品列表</a></li>
+          <li class="level-3"><a href="#sec-15-3-1">本章練習</a></li>
         </ul>
       </aside>
     </div>

@@ -53,14 +53,27 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>當你能手工打造主題後，下一步是學習業界常用的開發框架，加速開發、提升程式碼品質。</p>
+                <p>當主題開發規模變大，從空白資料夾手刻所有檔案會變得沒效率。本章介紹 Underscores 與 Sage 兩種常見工具，幫助你理解 starter theme 與現代化主題開發流程。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能理解 starter theme 的價值，比較 Underscores 與 Sage 的差異，並判斷何時需要導入建置工具。</p>
+          </div>
+        </div>
         <h2 id="sec-10-1">10.1 Underscores 佈景主題</h2>
-        <p><a href='https://underscores.me/' target='_blank' rel='noopener'>Underscores (_s)</a> 是 Automattic 官方提供的「starter theme」骨架，提供完整的 Template Hierarchy、Sass 結構、無障礙支援，但不含視覺設計。</p>
-        <p>本節示範如何到 underscores.me 客製化主題名稱、下載骨架，並在此基礎上加入自己的 CSS 與功能。</p>
-
+        <p>Underscores 是 Automattic 推出的 starter theme，提供乾淨的模板結構、基本樣式與 WordPress 主題常見檔案。它不是拿來直接當成最終主題，而是開發起點。</p>
+        <h3 id="sec-10-1-1">Underscores 適合的情境</h3>
+        <ul><li>想從接近空白但結構完整的主題開始。</li><li>需要學習標準模板檔如何組織。</li><li>不想一開始導入複雜建置流程。</li></ul>
+        <h3 id="sec-10-1-2">檢視產生後的主題</h3>
+        <p>產生後可觀察 <code>template-parts</code>、<code>inc</code>、<code>functions.php</code> 與各種模板檔如何分工。建議先跑起來，再逐步刪除不需要的部分。</p>
         <h2 id="sec-10-2">10.2 Sage 簡介與使用</h2>
-        <p><a href='https://roots.io/sage/' target='_blank' rel='noopener'>Sage</a> 是 Roots 團隊出品的進階主題框架，採用 Laravel Blade 模板引擎、Tailwind CSS、Vite，並依循現代 PHP / Composer 最佳實踐。</p>
-        <p>本節介紹 Sage 的安裝（需 Composer + Node.js）、目錄結構，以及如何使用 Blade 撰寫更乾淨的模板。</p>
+        <p>Sage 是 Roots 生態中的現代化 starter theme，導入 Blade 模板、Composer、Vite 與較完整的前端建置流程。它適合熟悉命令列、套件管理與現代前端工具的團隊。</p>
+        <h3 id="sec-10-2-1">Sage 的優點與成本</h3>
+        <ul><li>優點：模板清楚、資源建置現代化、適合團隊協作。</li><li>成本：學習曲線較高，部署流程也比傳統主題複雜。</li><li>建議：小型教學或簡單網站可先用傳統主題，大型專案再評估 Sage。</li></ul>
+        <h3 id="sec-10-2-2">本章練習</h3>
+        <ol><li>下載或產生一份 Underscores 主題。</li><li>找出它的文章列表、單篇文章與模板片段檔案。</li><li>比較 Underscores 與前面手工主題的差異。</li><li>閱讀 Sage 文件，列出導入前需要具備的工具知識。</li></ol>
+
+
 
         <nav class="article-nav">
           <a href="chapter-09.html">
@@ -76,9 +89,13 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                <ul>
           <li class="level-2"><a href="#sec-10-1">10.1 Underscores 佈景主題</a></li>
+          <li class="level-3"><a href="#sec-10-1-1">Underscores 適合的情境</a></li>
+          <li class="level-3"><a href="#sec-10-1-2">檢視產生後的主題</a></li>
           <li class="level-2"><a href="#sec-10-2">10.2 Sage 簡介與使用</a></li>
+          <li class="level-3"><a href="#sec-10-2-1">Sage 的優點與成本</a></li>
+          <li class="level-3"><a href="#sec-10-2-2">本章練習</a></li>
         </ul>
       </aside>
     </div>

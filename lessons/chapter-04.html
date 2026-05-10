@@ -53,18 +53,41 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>佈景主題 (Theme) 決定了你網站的外觀與排版。本章從使用者角度出發，介紹如何挑選、安裝與調整佈景主題。</p>
+                        <p>佈景主題 (Theme) 決定網站的視覺風格、版面配置與前台輸出方式。本章從使用者角度開始，說明如何挑選、安裝、啟用與調整佈景主題，並建立「哪些修改適合在後台完成、哪些修改應進入程式碼」的判斷能力。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能分辨傳統佈景主題與區塊佈景主題，完成主題安裝、選單、網站識別、小工具與附加 CSS 調整。</p>
+          </div>
+        </div>
         <h2 id="sec-4-1">4.1 WordPress 佈景主題</h2>
-        <p>WordPress 佈景主題分為兩大類：<strong>Classic Theme</strong>（傳統 PHP 模板）與 <strong>Block Theme</strong>（支援 Full Site Editing）。</p>
-        <p>本節介紹官方主題目錄、付費主題市集 (ThemeForest 等)，以及挑選主題的關鍵指標：更新頻率、活躍安裝數、支援度與效能表現。</p>
-
+        <p>佈景主題是 WordPress 前台的呈現層。相同文章資料套用不同佈景主題後，可能變成部落格、企業網站、作品集或教學網站。主題不應直接負責核心商業資料儲存，否則一旦更換主題，重要功能可能跟著消失。</p>
+        <h3 id="sec-4-1-1">傳統主題與區塊主題</h3>
+        <ul><li><strong>Classic Theme</strong>：以 PHP 模板檔為主，例如 <code>index.php</code>、<code>single.php</code>、<code>page.php</code>。</li><li><strong>Block Theme</strong>：支援 Site Editor 與 <code>theme.json</code>，版面可由區塊與模板組成。</li><li><strong>Hybrid Theme</strong>：保留傳統模板，同時支援部分區塊與全站樣式能力。</li></ul>
+        <h3 id="sec-4-1-2">挑選主題的檢查指標</h3>
+        <p>挑選主題時，不要只看截圖是否漂亮，也要看維護狀態與相容性。</p>
+        <ul><li>最近更新時間是否接近目前 WordPress 版本。</li><li>是否支援響應式設計與行動裝置。</li><li>是否避免綁定過多短代碼或頁面建構器。</li><li>是否有清楚文件、評價與支援管道。</li><li>是否有良好效能，首頁不要載入過多未使用資源。</li></ul>
         <h2 id="sec-4-2">4.2 佈景主題編輯功能</h2>
-        <p>後台「外觀 → 自訂」(Customizer) 提供即時預覽的視覺化編輯器，可調整網站識別、色彩、選單、小工具等。</p>
-        <p>Block Theme 則使用「外觀 → 編輯器」(Site Editor)，能直接在前台編輯 Header、Footer、Template。</p>
-
+        <p>後台「外觀」區域提供許多不需寫程式即可完成的設定。使用者應先善用後台功能，避免一開始就修改主題檔案。</p>
+        <h3 id="sec-4-2-1">自訂器與網站識別</h3>
+        <p>傳統主題常使用「外觀 → 自訂」調整網站標題、標語、Logo、網站圖示、色彩、選單與小工具。這些設定會儲存在資料庫中，不會直接修改主題檔案。</p>
+        <h3 id="sec-4-2-2">站台編輯器與模板</h3>
+        <p>區塊主題使用「外觀 → 編輯器」調整頁首、頁尾、單篇文章、頁面與封存模板。編輯器的好處是彈性高，但也需要理解模板與內容的差異，避免把一次性內容寫進全站模板。</p>
+        <h3 id="sec-4-2-3">選單、小工具與樣式</h3>
+        <p>選單負責網站導覽，小工具常用於側欄與頁尾。若網站內容較多，建議先規劃資訊架構，再建立選單層級，避免導覽過深或名稱不一致。</p>
         <h2 id="sec-4-3">4.3 動手調整佈景主題</h2>
-        <p>本節透過「附加 CSS」面板，示範如何在不修改主題檔案的情況下，加入自己的 CSS 樣式覆寫，例如修改文字顏色、隱藏元素、調整間距等。</p>
-        <p>也會介紹 <strong>選單管理</strong>、<strong>小工具區域</strong>，以及如何上傳網站圖示 (Site Icon) 與標頭圖。</p>
+        <p>如果只需要調整少量外觀，可以先使用「附加 CSS」。例如調整文章標題顏色與卡片間距：</p>
+        <pre><code>.site-title { color: #2563eb; }
+.post-card { margin-bottom: 24px; }
+.post-card .entry-title { font-size: 1.5rem; }</code></pre>
+        <h3 id="sec-4-3-1">調整流程建議</h3>
+        <ol><li>先確認需求是內容、外觀還是功能。</li><li>後台能完成的先用後台設定。</li><li>少量樣式用附加 CSS。</li><li>大量版面修改使用子佈景主題或自訂主題。</li><li>功能型需求寫成外掛。</li></ol>
+        <h3 id="sec-4-3-2">本章練習</h3>
+        <ol><li>安裝一個官方主題並啟用。</li><li>設定網站標題、Logo、網站圖示與主選單。</li><li>新增一段附加 CSS 改變文章標題顏色。</li><li>比較傳統主題與區塊主題的編輯入口差異。</li></ol>
+
+
+
+
 
         <nav class="article-nav">
           <a href="chapter-03.html">
@@ -80,10 +103,17 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                        <ul>
           <li class="level-2"><a href="#sec-4-1">4.1 WordPress 佈景主題</a></li>
+          <li class="level-3"><a href="#sec-4-1-1">傳統主題與區塊主題</a></li>
+          <li class="level-3"><a href="#sec-4-1-2">挑選主題的檢查指標</a></li>
           <li class="level-2"><a href="#sec-4-2">4.2 佈景主題編輯功能</a></li>
+          <li class="level-3"><a href="#sec-4-2-1">自訂器與網站識別</a></li>
+          <li class="level-3"><a href="#sec-4-2-2">站台編輯器與模板</a></li>
+          <li class="level-3"><a href="#sec-4-2-3">選單、小工具與樣式</a></li>
           <li class="level-2"><a href="#sec-4-3">4.3 動手調整佈景主題</a></li>
+          <li class="level-3"><a href="#sec-4-3-1">調整流程建議</a></li>
+          <li class="level-3"><a href="#sec-4-3-2">本章練習</a></li>
         </ul>
       </aside>
     </div>

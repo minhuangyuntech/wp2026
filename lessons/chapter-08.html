@@ -53,14 +53,59 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>從本章開始進入完整的佈景主題製作實例。我們將從一個 HTML 設計稿出發，一步步轉換為功能完整的 WordPress 主題。</p>
+                <p>本章進入完整佈景主題製作實例。你會把前端版面拆成 WordPress 可維護的模板檔，建立頁首、頁尾、文章列表與基本版面結構，讓靜態頁面逐步變成可由後台管理內容的主題。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能規劃主題檔案結構，拆分共用模板，並將靜態 HTML 轉換成 WordPress 主題輸出。</p>
+          </div>
+        </div>
         <h2 id="sec-8-1">8.1 深入探討佈景主題的設計</h2>
-        <p>本節示範如何將靜態 HTML/CSS 切割為 <code>header.php</code>、<code>footer.php</code>、<code>sidebar.php</code> 與 <code>index.php</code>。</p>
-        <p>重點：使用 <code>wp_head()</code>、<code>wp_footer()</code>、<code>body_class()</code>、<code>language_attributes()</code> 等樣板標籤 (Template Tag) 讓主題完整支援外掛掛勾。</p>
-
+        <p>主題設計的第一步不是寫程式，而是拆解頁面：哪些區塊會重複出現？哪些內容由後台文章提供？哪些屬於全站設定？這些判斷會影響模板檔案如何分工。</p>
+        <h3 id="sec-8-1-1">主題檔案規劃</h3>
+        <pre><code>wp2026-theme/
+├── style.css
+├── functions.php
+├── header.php
+├── footer.php
+├── index.php
+├── single.php
+├── page.php
+└── assets/
+    ├── css/
+    └── js/</code></pre>
+        <p><code>header.php</code> 與 <code>footer.php</code> 放全站共用區塊，文章列表放在 <code>index.php</code>，單篇文章放在 <code>single.php</code>，靜態頁面放在 <code>page.php</code>。</p>
+        <h3 id="sec-8-1-2">從靜態 HTML 拆成模板</h3>
+        <p>靜態 HTML 通常有固定頁首、內容區與頁尾。轉為 WordPress 主題時，先把頁首移到 <code>header.php</code>，頁尾移到 <code>footer.php</code>，中間內容交給不同模板處理。</p>
+        <pre><code>&lt;?php get_header(); ?&gt;
+&lt;main class="site-main"&gt;
+  &lt;?php while (have_posts()) : the_post(); ?&gt;
+    &lt;article&gt;
+      &lt;h1&gt;&lt;?php the_title(); ?&gt;&lt;/h1&gt;
+      &lt;?php the_content(); ?&gt;
+    &lt;/article&gt;
+  &lt;?php endwhile; ?&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
         <h2 id="sec-8-2">8.2 進階佈景主題設計</h2>
-        <p>進階主題：實作 <code>functions.php</code> 中的 <code>after_setup_theme</code>，加入 Featured Image、Custom Menu、Custom Logo、HTML5 等支援。</p>
-        <p>使用 <code>wp_nav_menu()</code> 與 <code>register_sidebar()</code> 建立可由後台管理的選單與小工具區塊。</p>
+        <p>完成基本模板後，可以加入主題支援功能、選單位置、縮圖尺寸與資源載入流程，讓主題更接近實務需求。</p>
+        <h3 id="sec-8-2-1">註冊主題功能</h3>
+        <pre><code>add_action('after_setup_theme', 'wp2026_theme_setup');
+function wp2026_theme_setup() {
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('html5', ['search-form', 'gallery', 'caption']);
+    register_nav_menus([
+        'primary' =&gt; '主選單',
+        'footer' =&gt; '頁尾選單',
+    ]);
+}</code></pre>
+        <h3 id="sec-8-2-2">版面與樣式維護</h3>
+        <p>主題樣式應該有一致命名與結構。建議把全站容器、按鈕、文章卡片、導覽列與表單樣式拆成可重用的 class，避免在模板中寫大量 inline style。</p>
+        <h3 id="sec-8-2-3">本章練習</h3>
+        <ol><li>把一份靜態首頁拆成 <code>header.php</code>、<code>footer.php</code> 與 <code>index.php</code>。</li><li>註冊主選單並在頁首輸出。</li><li>讓文章列表顯示精選圖片、標題、日期與摘要。</li></ol>
+
+
 
         <nav class="article-nav">
           <a href="chapter-07.html">
@@ -76,9 +121,14 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                <ul>
           <li class="level-2"><a href="#sec-8-1">8.1 深入探討佈景主題的設計</a></li>
+          <li class="level-3"><a href="#sec-8-1-1">主題檔案規劃</a></li>
+          <li class="level-3"><a href="#sec-8-1-2">從靜態 HTML 拆成模板</a></li>
           <li class="level-2"><a href="#sec-8-2">8.2 進階佈景主題設計</a></li>
+          <li class="level-3"><a href="#sec-8-2-1">註冊主題功能</a></li>
+          <li class="level-3"><a href="#sec-8-2-2">版面與樣式維護</a></li>
+          <li class="level-3"><a href="#sec-8-2-3">本章練習</a></li>
         </ul>
       </aside>
     </div>

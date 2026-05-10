@@ -53,14 +53,40 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>預設的「文章」與「頁面」不夠用？Custom Post Type (CPT) 讓你能建立任何類型的內容，例如「商品」、「作品集」、「活動」。</p>
+                <p>Custom Post Type (CPT) 讓 WordPress 不只管理文章與頁面，也能管理課程、作品、商品、活動、師資等自訂內容。本章介紹 CPT 的適用情境與外掛實作方式。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能判斷何時需要 Custom Post Type，並使用外掛註冊自訂內容類型與基本前台顯示。</p>
+          </div>
+        </div>
         <h2 id="sec-14-1">14.1 自定義貼文類型應用之外掛介紹</h2>
-        <p>對非開發者來說，可使用 <strong>Custom Post Type UI</strong> 外掛，以 GUI 方式建立 CPT 與 Custom Taxonomy。</p>
-        <p>搭配 <strong>Advanced Custom Fields (ACF)</strong> 還能加入自訂欄位，建立完整的內容模型。</p>
-
+        <p>如果某類資料有自己的欄位、列表、分類或網址結構，就適合使用 CPT。例如「課程」可能有授課教師、週次、難度與教材連結，與一般文章不同。</p>
+        <h3 id="sec-14-1-1">CPT 與分類法</h3>
+        <p>CPT 定義內容類型，Taxonomy 定義分類方式。例如 <code>course</code> 是內容類型，而「難度」、「主題」、「學期」可以是分類法。</p>
         <h2 id="sec-14-2">14.2 在外掛中建立 Custom Post Type</h2>
-        <p>對開發者來說，正確做法是用程式碼註冊 CPT。核心函式為 <code>register_post_type()</code>，常配合 <code>register_taxonomy()</code> 註冊自訂分類法。</p>
-        <p>本節以「book」(書籍) CPT 為例，包含支援欄位 (title, editor, thumbnail)、可在主選單顯示、有自己的網址結構 (rewrite)。</p>
+        <pre><code>add_action('init', 'wp2026_register_course_cpt');
+function wp2026_register_course_cpt() {
+    register_post_type('course', [
+        'labels' =&gt; [
+            'name' =&gt; '課程',
+            'singular_name' =&gt; '課程',
+        ],
+        'public' =&gt; true,
+        'has_archive' =&gt; true,
+        'menu_icon' =&gt; 'dashicons-welcome-learn-more',
+        'supports' =&gt; ['title', 'editor', 'thumbnail', 'excerpt'],
+        'show_in_rest' =&gt; true,
+    ]);
+}</code></pre>
+        <h3 id="sec-14-2-1">網址與重新整理固定網址</h3>
+        <p>新增 CPT 後若前台出現 404，通常需要到「設定 → 固定網址」按儲存，讓 WordPress 重新產生 rewrite rules。</p>
+        <h3 id="sec-14-2-2">模板檔案</h3>
+        <p>若 CPT 名稱是 <code>course</code>，可在主題中建立 <code>archive-course.php</code> 與 <code>single-course.php</code> 控制列表與單篇頁面。</p>
+        <h3 id="sec-14-2-3">本章練習</h3>
+        <ol><li>建立 <code>course</code> CPT。</li><li>新增三筆課程資料。</li><li>建立課程封存頁模板。</li><li>加入一個課程分類法，例如「難度」。</li></ol>
+
+
 
         <nav class="article-nav">
           <a href="chapter-13.html">
@@ -76,9 +102,13 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                <ul>
           <li class="level-2"><a href="#sec-14-1">14.1 自定義貼文類型應用之外掛介紹</a></li>
+          <li class="level-3"><a href="#sec-14-1-1">CPT 與分類法</a></li>
           <li class="level-2"><a href="#sec-14-2">14.2 在外掛中建立 Custom Post Type</a></li>
+          <li class="level-3"><a href="#sec-14-2-1">網址與固定網址</a></li>
+          <li class="level-3"><a href="#sec-14-2-2">模板檔案</a></li>
+          <li class="level-3"><a href="#sec-14-2-3">本章練習</a></li>
         </ul>
       </aside>
     </div>

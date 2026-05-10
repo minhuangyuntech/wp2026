@@ -53,18 +53,56 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>延續上一章，本章深入探討 WP_Query 進階查詢、其他頁面模板的設計，以及多項主題開發的進階技巧。</p>
+                <p>本章延續佈景主題實例，加入 <code>WP_Query</code>、分類頁、單篇文章頁、自訂頁面模板與分頁等功能。這些能力會讓主題從「可以顯示文章」進一步變成「可以依需求組織內容」。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能使用 WP_Query 建立自訂文章列表，製作常見模板，並處理分頁、查無資料與重置查詢。</p>
+          </div>
+        </div>
         <h2 id="sec-9-1">9.1 WP_Query 類別探討</h2>
-        <p><code>WP_Query</code> 是 WordPress 中最強大的查詢類別，可依照分類、標籤、自訂欄位、日期等條件抓取文章。</p>
-        <p>範例：<code>$q = new WP_Query(['category_name' =&gt; 'news', 'posts_per_page' =&gt; 5]);</code>，搭配 <code>$q-&gt;have_posts()</code> 進入 Loop。</p>
-        <p>本節也會介紹 <code>pre_get_posts</code> 鉤點，用以修改主查詢而不破壞主題核心邏輯。</p>
+        <p><code>WP_Query</code> 是 WordPress 查詢文章的核心類別。主查詢由 WordPress 根據網址自動建立，自訂查詢則可用於首頁精選文章、課程列表或側欄推薦文章。</p>
+        <h3 id="sec-9-1-1">建立自訂查詢</h3>
+        <pre><code>$course_query = new WP_Query([
+    'post_type' =&gt; 'post',
+    'posts_per_page' =&gt; 6,
+    'category_name' =&gt; 'wordpress',
+]);
 
+if ($course_query-&gt;have_posts()) {
+    while ($course_query-&gt;have_posts()) {
+        $course_query-&gt;the_post();
+        the_title('&lt;h2&gt;', '&lt;/h2&gt;');
+    }
+    wp_reset_postdata();
+}</code></pre>
+        <p>使用自訂查詢後一定要呼叫 <code>wp_reset_postdata()</code>，避免影響後續模板標籤。</p>
+        <h3 id="sec-9-1-2">常用查詢參數</h3>
+        <ul><li><code>post_type</code>：文章類型。</li><li><code>posts_per_page</code>：每頁筆數。</li><li><code>category_name</code> 或 <code>cat</code>：分類條件。</li><li><code>orderby</code> 與 <code>order</code>：排序方式。</li><li><code>meta_query</code>：依自訂欄位查詢。</li></ul>
         <h2 id="sec-9-2">9.2 其他頁面模板的設計</h2>
-        <p>本節介紹 <code>archive.php</code>、<code>category.php</code>、<code>tag.php</code>、<code>single.php</code>、<code>page.php</code>、<code>404.php</code>、<code>search.php</code> 等模板的撰寫要點。</p>
-        <p>也介紹「Page Template」機制，可讓使用者在後台為單一頁面選擇不同版型。</p>
-
+        <p>WordPress 會依照 Template Hierarchy 自動選擇模板，例如分類頁優先找 <code>category.php</code>，單篇文章找 <code>single.php</code>，頁面找 <code>page.php</code>。</p>
+        <h3 id="sec-9-2-1">建立頁面模板</h3>
+        <pre><code>&lt;?php
+/*
+Template Name: 課程首頁
+*/
+get_header();
+?&gt;
+&lt;main&gt;自訂課程首頁內容&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+        <p>有了自訂頁面模板後，可在後台頁面編輯畫面選擇該模板。</p>
         <h2 id="sec-9-3">9.3 其他進階主題</h2>
-        <p>進階技巧：自訂分頁 (<code>paginate_links()</code>)、麵包屑、相關文章、Featured Image 縮圖大小註冊 (<code>add_image_size()</code>)、enqueue 樣式與腳本的條件式載入。</p>
+        <h3 id="sec-9-3-1">分頁與查無資料</h3>
+        <p>完整主題不能只處理有資料的情況，也要處理查無文章與分頁。</p>
+        <pre><code>the_posts_pagination([
+    'mid_size' =&gt; 2,
+    'prev_text' =&gt; '上一頁',
+    'next_text' =&gt; '下一頁',
+]);</code></pre>
+        <h3 id="sec-9-3-2">本章練習</h3>
+        <ol><li>用 <code>WP_Query</code> 建立一個精選文章區塊。</li><li>建立 <code>single.php</code> 與 <code>page.php</code>。</li><li>為文章列表加入分頁與查無資料訊息。</li></ol>
+
+
 
         <nav class="article-nav">
           <a href="chapter-08.html">
@@ -80,10 +118,15 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                <ul>
           <li class="level-2"><a href="#sec-9-1">9.1 WP_Query 類別探討</a></li>
+          <li class="level-3"><a href="#sec-9-1-1">建立自訂查詢</a></li>
+          <li class="level-3"><a href="#sec-9-1-2">常用查詢參數</a></li>
           <li class="level-2"><a href="#sec-9-2">9.2 其他頁面模板的設計</a></li>
+          <li class="level-3"><a href="#sec-9-2-1">建立頁面模板</a></li>
           <li class="level-2"><a href="#sec-9-3">9.3 其他進階主題</a></li>
+          <li class="level-3"><a href="#sec-9-3-1">分頁與查無資料</a></li>
+          <li class="level-3"><a href="#sec-9-3-2">本章練習</a></li>
         </ul>
       </aside>
     </div>

@@ -53,15 +53,63 @@
 
     <div class="article-layout">
       <article class="article-body">
-        <p>本章我們不再依賴現成主題，而是從零開始手工打造一個自己的佈景主題，並學習子主題 (Child Theme) 這項保護客製化內容的最佳實踐。</p>
+                        <p>本章開始從使用者操作進入主題開發。你會建立一個最小可啟用的 WordPress 佈景主題，理解主題必要檔案、模板載入方式，以及如何用子佈景主題安全覆寫既有主題。</p>
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本章學習目標</div>
+            <p>能建立自訂主題骨架，理解 style.css、index.php、functions.php 的角色，並能建立子佈景主題保留客製化修改。</p>
+          </div>
+        </div>
         <h2 id="sec-6-1">6.1 自訂佈景主題基礎</h2>
-        <p>一個最簡單的 WordPress 主題只需要兩個檔案：<code>style.css</code>（含主題標頭資訊）與 <code>index.php</code>。</p>
-        <p><code>style.css</code> 開頭的註解區塊定義了主題名稱、版本、作者，例如：<code>/* Theme Name: WP2026 */</code>。</p>
-        <p>本節從建立 themes/wp2026 資料夾開始，逐步加入 <code>functions.php</code>、<code>header.php</code>、<code>footer.php</code> 等模板檔案。</p>
-
+        <p>一個最小 WordPress 主題至少需要 <code>style.css</code> 與 <code>index.php</code>。<code>style.css</code> 的檔頭讓 WordPress 辨識主題，<code>index.php</code> 則是最基本的模板檔。</p>
+        <h3 id="sec-6-1-1">建立主題資料夾</h3>
+        <pre><code>wp-content/themes/wp2026-basic/
+├── style.css
+├── index.php
+└── functions.php</code></pre>
+        <p><code>style.css</code> 檔頭範例：</p>
+        <pre><code>/*
+Theme Name: WP2026 Basic
+Author: minhuangyuntech
+Version: 1.0.0
+Text Domain: wp2026-basic
+*/</code></pre>
+        <h3 id="sec-6-1-2">輸出文章列表</h3>
+        <pre><code>&lt;?php get_header(); ?&gt;
+&lt;main&gt;
+&lt;?php if (have_posts()) : ?&gt;
+  &lt;?php while (have_posts()) : the_post(); ?&gt;
+    &lt;article&gt;
+      &lt;h2&gt;&lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;&lt;?php the_title(); ?&gt;&lt;/a&gt;&lt;/h2&gt;
+      &lt;?php the_excerpt(); ?&gt;
+    &lt;/article&gt;
+  &lt;?php endwhile; ?&gt;
+&lt;?php endif; ?&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+        <h3 id="sec-6-1-3">載入樣式與腳本</h3>
+        <p>不要在模板中硬寫 CSS 或 script 路徑，應透過 <code>wp_enqueue_scripts</code> 載入。</p>
+        <pre><code>add_action('wp_enqueue_scripts', 'wp2026_enqueue_assets');
+function wp2026_enqueue_assets() {
+    wp_enqueue_style('wp2026-style', get_stylesheet_uri(), [], '1.0.0');
+}</code></pre>
         <h2 id="sec-6-2">6.2 子佈景主題的運用</h2>
-        <p>子主題 (Child Theme) 繼承自父主題，可在不修改父主題檔案的情況下做客製化，避免父主題更新時遺失修改。</p>
-        <p>建立子主題只需要一個資料夾、一個 <code>style.css</code>（聲明 <code>Template:</code>）和一個 <code>functions.php</code>（用 <code>wp_enqueue_style()</code> 載入父主題樣式）。</p>
+        <p>子佈景主題 (Child Theme) 可以繼承父主題，並只覆寫需要修改的部分。這樣父主題更新時，你的客製化檔案不會被覆蓋。</p>
+        <h3 id="sec-6-2-1">建立子主題</h3>
+        <pre><code>/*
+Theme Name: WP2026 Child
+Template: twentytwentysix
+Version: 1.0.0
+*/</code></pre>
+        <p><code>Template</code> 必須填父主題資料夾名稱，而不是主題顯示名稱。</p>
+        <h3 id="sec-6-2-2">何時用子主題</h3>
+        <ul><li>只想微調現有主題的樣式或模板。</li><li>客戶網站使用商業主題，仍需要保留更新能力。</li><li>不想從零建立完整主題。</li></ul>
+        <h3 id="sec-6-2-3">本章練習</h3>
+        <ol><li>建立一個名為 <code>wp2026-basic</code> 的主題並啟用。</li><li>讓首頁列出文章標題與摘要。</li><li>使用 <code>functions.php</code> 載入樣式。</li><li>建立一個子主題，覆寫父主題的部分樣式。</li></ol>
+
+
+
+
 
         <nav class="article-nav">
           <a href="chapter-05.html">
@@ -77,9 +125,15 @@
 
       <aside class="toc">
         <div class="toc-title">本章節次</div>
-        <ul>
+                        <ul>
           <li class="level-2"><a href="#sec-6-1">6.1 自訂佈景主題基礎</a></li>
+          <li class="level-3"><a href="#sec-6-1-1">建立主題資料夾</a></li>
+          <li class="level-3"><a href="#sec-6-1-2">輸出文章列表</a></li>
+          <li class="level-3"><a href="#sec-6-1-3">載入樣式與腳本</a></li>
           <li class="level-2"><a href="#sec-6-2">6.2 子佈景主題的運用</a></li>
+          <li class="level-3"><a href="#sec-6-2-1">建立子主題</a></li>
+          <li class="level-3"><a href="#sec-6-2-2">何時用子主題</a></li>
+          <li class="level-3"><a href="#sec-6-2-3">本章練習</a></li>
         </ul>
       </aside>
     </div>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="附錄 A - 整理 20 個最受歡迎與最常見的 WordPress 外掛，說明用途、適用情境、注意事項與選用建議。" />
+  <title>附錄 A｜20 大熱門 WordPress 外掛 - WP2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="../index.html" class="nav-link">首頁</a>
+        <a href="../lessons.html" class="nav-link active">所有章節</a>
+        <a href="../index.html#features" class="nav-link">特色</a>
+        <a href="../index.html#about" class="nav-link">關於</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <main class="article">
+    <div class="container-narrow">
+      <header class="article-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">首頁</a> / <a href="../lessons.html">所有章節</a> / <span>附錄 A</span>
+        </nav>
+        <span class="article-eyebrow">APPENDIX A · 外掛總覽 · 選用指南</span>
+        <h1 class="article-title">20 大熱門 WordPress 外掛整理</h1>
+        <div class="article-meta">
+          <span>共 5 節</span>
+          <span>更新於 2026/05</span>
+        </div>
+      </header>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-body">
+        <p>WordPress 外掛生態非常龐大。WordPress.org 官方外掛目錄目前收錄超過六萬個外掛，而熱門外掛的安裝數、評分與相容性會隨版本更新持續變動。本附錄整理 20 個常見於熱門榜、百萬安裝等級或實務網站中高度常用的外掛，幫助你快速理解各類外掛的用途與選用重點。</p>
+
+        <div class="callout callout-warning">
+          <div class="callout-content">
+            <div class="callout-title">選用外掛前請先確認</div>
+            <p>安裝數不等於一定適合你的網站。正式使用前應檢查最後更新時間、相容 WordPress 版本、PHP 版本、評價、支援狀態、安全紀錄與是否真的符合需求。</p>
+          </div>
+        </div>
+
+        <h2 id="sec-a-1">A.1 熱門外掛快速總表</h2>
+        <p>下表以外掛用途分類整理。實際排名會隨 WordPress.org 統計變動，因此建議把這份表當作學習與選型起點，而不是永久排名。</p>
+        <ol>
+          <li><strong>Elementor Website Builder</strong>：視覺化頁面建構器，適合快速製作自訂頁面與行銷版面。</li>
+          <li><strong>Yoast SEO</strong>：SEO 分析與 metadata 管理工具，適合內容網站與行銷網站。</li>
+          <li><strong>Contact Form 7</strong>：經典聯絡表單外掛，輕量、彈性高，但進階功能常需搭配其他外掛。</li>
+          <li><strong>Classic Editor</strong>：恢復傳統編輯器，常用於維護舊網站或相容舊工作流程。</li>
+          <li><strong>LiteSpeed Cache</strong>：快取與效能優化工具，特別適合 LiteSpeed / OpenLiteSpeed 主機。</li>
+          <li><strong>WooCommerce</strong>：WordPress 最重要的電商外掛，詳見附錄 B。</li>
+          <li><strong>Akismet Anti-spam</strong>：留言與表單垃圾訊息防護，常見於開放留言或表單網站。</li>
+          <li><strong>WPForms</strong>：拖拉式表單建構器，適合需要快速建立表單的使用者。</li>
+          <li><strong>All in One SEO</strong>：SEO 工具，與 Yoast、Rank Math 屬於同類型選項。</li>
+          <li><strong>Jetpack</strong>：整合安全、備份、統計、CDN、分享等多功能模組。</li>
+          <li><strong>Wordfence Security</strong>：防火牆、惡意程式掃描與登入保護。</li>
+          <li><strong>Really Simple Security</strong>：HTTPS、登入與基礎安全設定輔助。</li>
+          <li><strong>UpdraftPlus</strong>：備份與還原工具，可備份到雲端儲存。</li>
+          <li><strong>Rank Math SEO</strong>：另一套熱門 SEO 外掛，功能完整、設定彈性高。</li>
+          <li><strong>Site Kit by Google</strong>：整合 Google Search Console、Analytics、AdSense 等服務。</li>
+          <li><strong>Smush</strong>：圖片壓縮與最佳化，適合媒體檔案較多的網站。</li>
+          <li><strong>WP Mail SMTP</strong>：修正 WordPress 寄信可靠性，改用 SMTP 或第三方寄信服務。</li>
+          <li><strong>Advanced Custom Fields (ACF)</strong>：建立自訂欄位，是內容建模與客製化開發常用工具。</li>
+          <li><strong>Duplicator</strong>：網站搬家、備份與複製工具。</li>
+          <li><strong>W3 Total Cache</strong>：快取與效能優化工具，適合需要細部調整的進階使用者。</li>
+        </ol>
+
+        <h2 id="sec-a-2">A.2 依用途分類選擇外掛</h2>
+        <h3 id="sec-a-2-1">頁面建構與內容編輯</h3>
+        <p>Elementor 這類頁面建構器能讓非工程使用者快速設計頁面，但也可能增加 CSS、JavaScript 與資料結構複雜度。若網站需要長期維護，建議明確規範哪些頁面可用頁面建構器，哪些內容應交給文章、頁面或區塊管理。</p>
+        <h3 id="sec-a-2-2">SEO 與流量分析</h3>
+        <p>Yoast SEO、All in One SEO、Rank Math 都能管理 title、description、Open Graph、schema 與 sitemap。SEO 外掛只提供技術基礎，真正影響搜尋表現的仍是內容品質、網站速度、資訊架構與外部連結。</p>
+        <h3 id="sec-a-2-3">安全、備份與維護</h3>
+        <p>Wordfence、Really Simple Security、Akismet、UpdraftPlus、Duplicator 屬於維運類工具。這些外掛應優先部署在正式網站，因為安全與備份通常不是出事後才補救，而是上線前就應規劃。</p>
+        <h3 id="sec-a-2-4">效能與媒體最佳化</h3>
+        <p>LiteSpeed Cache、W3 Total Cache、Smush 能改善載入速度，但效能外掛不是萬靈丹。若主題與外掛載入過多資源、圖片尺寸過大、主機效能不足，即使安裝快取外掛也只能改善一部分問題。</p>
+        <h3 id="sec-a-2-5">表單、寄信與資料收集</h3>
+        <p>Contact Form 7、WPForms、WP Mail SMTP 常一起出現在網站中。表單負責收集資料，SMTP 外掛負責提高寄信成功率。若表單包含個資，應加入隱私權聲明、資料保存期限與必要的防垃圾機制。</p>
+
+        <h2 id="sec-a-3">A.3 選用外掛的評估準則</h2>
+        <ul>
+          <li><strong>必要性</strong>：能不用外掛就不用外掛，能用一個外掛完成就不要裝三個相似外掛。</li>
+          <li><strong>維護狀態</strong>：檢查最近更新時間、測試到的 WordPress 版本與支援討論。</li>
+          <li><strong>功能邊界</strong>：確認外掛是否只做你需要的事，或綁定太多不需要的模組。</li>
+          <li><strong>資料可攜性</strong>：停用外掛後內容是否仍可讀？資料是否被短代碼鎖住？</li>
+          <li><strong>效能成本</strong>：是否在每頁載入大量 CSS/JS？是否增加資料庫查詢？</li>
+          <li><strong>安全紀錄</strong>：熱門外掛也是攻擊目標，務必定期更新。</li>
+        </ul>
+
+        <h2 id="sec-a-4">A.4 實務建議：少裝、常更新、可回復</h2>
+        <p>外掛越多，網站的相容性與安全風險越高。實務上建議把外掛分成三類：必要外掛、可替代外掛、實驗外掛。正式網站只保留必要外掛，可替代外掛需評估成本，實驗外掛不要留在正式環境。</p>
+        <p>每次更新外掛前，先備份資料庫與檔案。若是電商、會員、金流或表單網站，應先在測試站更新，確認流程正常後再部署到正式站。</p>
+
+        <h2 id="sec-a-5">A.5 參考資料</h2>
+        <ul>
+          <li><a href="https://wordpress.org/plugins/" target="_blank" rel="noopener">WordPress.org Plugin Directory</a></li>
+          <li><a href="https://wordpress.org/plugins/browse/popular/" target="_blank" rel="noopener">WordPress.org Popular Plugins</a></li>
+          <li><a href="https://wordpress.org/plugins/woocommerce/" target="_blank" rel="noopener">WooCommerce on WordPress.org</a></li>
+        </ul>
+
+        <nav class="article-nav">
+          <a href="chapter-16.html">
+            <div class="article-nav-label">← 上一章</div>
+            <div class="article-nav-title">CHAPTER 16 · 進階主題與活用 AI</div>
+          </a>
+          <a href="appendix-b.html" class="article-nav-next">
+            <div class="article-nav-label">下一篇 →</div>
+            <div class="article-nav-title">附錄 B · 電商外掛 WooCommerce</div>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="toc">
+        <div class="toc-title">本章節次</div>
+        <ul>
+          <li class="level-2"><a href="#sec-a-1">A.1 熱門外掛快速總表</a></li>
+          <li class="level-2"><a href="#sec-a-2">A.2 依用途分類選擇外掛</a></li>
+          <li class="level-3"><a href="#sec-a-2-1">頁面建構與內容編輯</a></li>
+          <li class="level-3"><a href="#sec-a-2-2">SEO 與流量分析</a></li>
+          <li class="level-3"><a href="#sec-a-2-3">安全、備份與維護</a></li>
+          <li class="level-3"><a href="#sec-a-2-4">效能與媒體最佳化</a></li>
+          <li class="level-3"><a href="#sec-a-2-5">表單、寄信與資料收集</a></li>
+          <li class="level-2"><a href="#sec-a-3">A.3 選用外掛的評估準則</a></li>
+          <li class="level-2"><a href="#sec-a-4">A.4 實務建議</a></li>
+          <li class="level-2"><a href="#sec-a-5">A.5 參考資料</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

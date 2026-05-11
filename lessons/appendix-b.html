@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="附錄 B - 詳細說明 WordPress 電商外掛 WooCommerce，包括商品、購物車、結帳、金流、物流、稅務、訂單管理與開發重點。" />
+  <title>附錄 B｜電商外掛 WooCommerce - WP2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-logo">W</span>
+        <span>WP2026</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主選單">
+        <a href="../index.html" class="nav-link">首頁</a>
+        <a href="../lessons.html" class="nav-link active">所有章節</a>
+        <a href="../index.html#features" class="nav-link">特色</a>
+        <a href="../index.html#about" class="nav-link">關於</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="切換深色 / 淺色模式">
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <main class="article">
+    <div class="container-narrow">
+      <header class="article-header">
+        <nav class="breadcrumb">
+          <a href="../index.html">首頁</a> / <a href="../lessons.html">所有章節</a> / <span>附錄 B</span>
+        </nav>
+        <span class="article-eyebrow">APPENDIX B · WooCommerce · 電商實務</span>
+        <h1 class="article-title">電商外掛 WooCommerce 詳解</h1>
+        <div class="article-meta">
+          <span>共 8 節</span>
+          <span>更新於 2026/05</span>
+        </div>
+      </header>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-body">
+        <p>WooCommerce 是 WordPress 生態中最重要的電商外掛之一。它把 WordPress 從內容管理系統擴充為線上商店，提供商品、購物車、結帳、訂單、金流、物流、折價券、稅務與報表等功能。若你要用 WordPress 建立電商網站，WooCommerce 通常是第一個需要深入理解的選項。</p>
+
+        <div class="callout callout-tip">
+          <div class="callout-content">
+            <div class="callout-title">本附錄學習目標</div>
+            <p>理解 WooCommerce 的資料模型、商店設定、商品類型、結帳流程、訂單管理與客製化開發重點，能評估一個 WordPress 網站是否適合使用 WooCommerce 建置電商功能。</p>
+          </div>
+        </div>
+
+        <h2 id="sec-b-1">B.1 WooCommerce 是什麼</h2>
+        <p>WooCommerce 是一套開源電商外掛，由 Automattic 相關團隊維護。安裝後，WordPress 會新增商品、訂單、顧客、折價券、商店設定與報表等功能。它的核心優勢是與 WordPress 內容系統整合良好，並有龐大的主題與擴充外掛生態。</p>
+        <p>WooCommerce 適合以下情境：</p>
+        <ul>
+          <li>品牌官網需要加入商品銷售功能。</li>
+          <li>小型到中型商店需要自行掌握網站與資料。</li>
+          <li>需要高度客製商品頁、內容行銷與 SEO。</li>
+          <li>需要串接特定金流、物流、會員、發票或 ERP 系統。</li>
+        </ul>
+        <p>若網站需要極大量商品、極高交易量或複雜多倉儲流程，仍可使用 WooCommerce，但必須更重視主機、快取、資料庫效能與系統架構。</p>
+
+        <h2 id="sec-b-2">B.2 安裝後的核心頁面與設定</h2>
+        <p>WooCommerce 安裝後通常會建立或指定幾個核心頁面：商店、購物車、結帳、我的帳號。這些頁面是結帳流程的骨架，不能隨意刪除。</p>
+        <h3 id="sec-b-2-1">基本商店設定</h3>
+        <ul>
+          <li><strong>商店地址</strong>：影響稅務、運送區域與預設幣別。</li>
+          <li><strong>幣別</strong>：決定前台價格顯示與付款金額。</li>
+          <li><strong>商品單位</strong>：重量與尺寸會影響物流計算。</li>
+          <li><strong>帳號與隱私</strong>：設定是否允許訪客結帳、是否自動建立帳號。</li>
+          <li><strong>電子郵件</strong>：訂單通知、顧客通知與商店管理者通知。</li>
+        </ul>
+        <h3 id="sec-b-2-2">商店上線前檢查</h3>
+        <ol>
+          <li>確認商店頁、購物車頁、結帳頁與我的帳號頁都存在。</li>
+          <li>設定正確幣別、稅務與運送地區。</li>
+          <li>測試至少一筆完整訂單。</li>
+          <li>確認顧客與管理者都能收到 email。</li>
+          <li>確認隱私權政策、退換貨政策與付款說明。</li>
+        </ol>
+
+        <h2 id="sec-b-3">B.3 商品類型與商品資料</h2>
+        <p>WooCommerce 的商品不只是文章標題與內容，它還包含價格、庫存、運送、屬性、變化、圖片、分類、標籤與交叉銷售資料。</p>
+        <h3 id="sec-b-3-1">常見商品類型</h3>
+        <ul>
+          <li><strong>簡單商品</strong>：最常見商品，例如一本書、一件衣服、一個課程名額。</li>
+          <li><strong>可變商品</strong>：有尺寸、顏色等變化，例如同一件衣服有 S/M/L。</li>
+          <li><strong>虛擬商品</strong>：不需要物流，例如線上諮詢、課程服務。</li>
+          <li><strong>可下載商品</strong>：購買後可下載檔案，例如電子書、素材包。</li>
+          <li><strong>群組商品</strong>：把多個商品組合展示。</li>
+          <li><strong>外部/聯盟商品</strong>：商品頁在本站展示，但購買導向外部網站。</li>
+        </ul>
+        <h3 id="sec-b-3-2">商品屬性與變化</h3>
+        <p>屬性是商品的規格，例如尺寸、顏色、材質。當屬性用於可變商品時，每個變化都可以有自己的價格、庫存、SKU 與圖片。設計商品資料時，要避免把「分類」與「屬性」混在一起。</p>
+        <p>例如服飾商品可這樣設計：</p>
+        <ul>
+          <li>商品分類：上衣、褲子、外套。</li>
+          <li>商品屬性：尺寸、顏色、材質。</li>
+          <li>商品標籤：夏季、熱賣、限量。</li>
+        </ul>
+
+        <h2 id="sec-b-4">B.4 購物車與結帳流程</h2>
+        <p>WooCommerce 的核心流程是：瀏覽商品 → 加入購物車 → 填寫結帳資料 → 選擇付款與運送方式 → 建立訂單 → 完成付款 → 訂單狀態更新。</p>
+        <h3 id="sec-b-4-1">結帳欄位</h3>
+        <p>結帳欄位包含帳單資訊、運送資訊、訂單備註與付款方式。不同國家、物流與金流需求會影響欄位設計。若要修改欄位，應優先使用可靠的結帳欄位外掛或 WooCommerce hooks，而不是直接改核心檔案。</p>
+        <h3 id="sec-b-4-2">常見訂單狀態</h3>
+        <ul>
+          <li><strong>Pending payment</strong>：等待付款。</li>
+          <li><strong>Processing</strong>：已付款，等待出貨或處理。</li>
+          <li><strong>Completed</strong>：訂單完成。</li>
+          <li><strong>On hold</strong>：保留中，常見於人工確認付款。</li>
+          <li><strong>Cancelled</strong>：已取消。</li>
+          <li><strong>Refunded</strong>：已退款。</li>
+          <li><strong>Failed</strong>：付款失敗。</li>
+        </ul>
+
+        <h2 id="sec-b-5">B.5 金流、物流與稅務</h2>
+        <h3 id="sec-b-5-1">金流</h3>
+        <p>WooCommerce 本身提供付款方式架構，實際付款通常透過金流外掛串接，例如信用卡、PayPal、Stripe、銀行轉帳、貨到付款或各地區第三方金流。金流外掛必須特別注意安全性、維護狀態與測試模式。</p>
+        <h3 id="sec-b-5-2">物流</h3>
+        <p>物流設定通常包含運送區域、運送方式與運費規則。基本方式有固定運費、免運費與到店取貨。若要串接超商取貨、宅配 API 或即時計算運費，通常需要地區性物流外掛。</p>
+        <h3 id="sec-b-5-3">稅務</h3>
+        <p>稅務設定與商店所在國家、銷售地區、商品類型有關。課程網站可先理解稅率、含稅/未稅價格顯示與發票需求；正式商店則應依當地法規與會計建議設定。</p>
+
+        <h2 id="sec-b-6">B.6 WooCommerce 的資料與開發模型</h2>
+        <p>WooCommerce 使用 WordPress 的 CPT 與 metadata 架構管理商品與訂單，同時也有自己的資料表與 CRUD API。開發時應優先使用 WooCommerce 提供的函式與物件，不要直接依賴資料表細節。</p>
+        <h3 id="sec-b-6-1">取得商品資料</h3>
+        <pre><code>$product = wc_get_product($product_id);
+
+if ($product) {
+    echo esc_html($product-&gt;get_name());
+    echo esc_html($product-&gt;get_price());
+}</code></pre>
+        <h3 id="sec-b-6-2">判斷 WooCommerce 是否啟用</h3>
+        <pre><code>if (class_exists('WooCommerce')) {
+    // WooCommerce 已啟用，可以執行相關功能
+}</code></pre>
+        <h3 id="sec-b-6-3">常見 Hook 情境</h3>
+        <ul>
+          <li>在商品頁加入額外資訊。</li>
+          <li>在加入購物車前檢查條件。</li>
+          <li>在結帳後把訂單資料送到外部系統。</li>
+          <li>在 email 中加入自訂訊息。</li>
+          <li>在後台訂單頁顯示額外欄位。</li>
+        </ul>
+        <pre><code>add_action('woocommerce_single_product_summary', 'wp2026_product_note', 25);
+function wp2026_product_note() {
+    echo '&lt;p class="product-note"&gt;' . esc_html('購買前請確認商品規格。') . '&lt;/p&gt;';
+}</code></pre>
+
+        <h2 id="sec-b-7">B.7 實務維運與效能注意事項</h2>
+        <ul>
+          <li><strong>備份</strong>：電商網站訂單變動頻繁，備份頻率應高於一般內容網站。</li>
+          <li><strong>測試站</strong>：更新 WooCommerce、金流或物流外掛前，先在 staging 測試完整購買流程。</li>
+          <li><strong>快取</strong>：購物車、結帳、我的帳號頁通常不應被整頁快取。</li>
+          <li><strong>Email</strong>：使用 SMTP 或交易型郵件服務，避免訂單信漏寄。</li>
+          <li><strong>安全</strong>：強制 HTTPS，管理員使用強密碼與雙因素驗證。</li>
+          <li><strong>紀錄</strong>：保留付款、物流與錯誤紀錄，方便追查訂單問題。</li>
+        </ul>
+
+        <h2 id="sec-b-8">B.8 參考資料</h2>
+        <ul>
+          <li><a href="https://woocommerce.com/documentation/" target="_blank" rel="noopener">WooCommerce Documentation</a></li>
+          <li><a href="https://woocommerce.com/document/woocommerce-settings/" target="_blank" rel="noopener">WooCommerce Settings</a></li>
+          <li><a href="https://woocommerce.com/document/managing-products/" target="_blank" rel="noopener">Managing Products</a></li>
+          <li><a href="https://woocommerce.com/document/managing-orders/" target="_blank" rel="noopener">Managing Orders</a></li>
+          <li><a href="https://developer.woocommerce.com/" target="_blank" rel="noopener">WooCommerce Developer Resources</a></li>
+        </ul>
+
+        <nav class="article-nav">
+          <a href="appendix-a.html">
+            <div class="article-nav-label">← 上一篇</div>
+            <div class="article-nav-title">附錄 A · 20 大熱門 WordPress 外掛</div>
+          </a>
+          <a href="../lessons.html" class="article-nav-next">
+            <div class="article-nav-label">完成 →</div>
+            <div class="article-nav-title">回到所有章節</div>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="toc">
+        <div class="toc-title">本章節次</div>
+        <ul>
+          <li class="level-2"><a href="#sec-b-1">B.1 WooCommerce 是什麼</a></li>
+          <li class="level-2"><a href="#sec-b-2">B.2 核心頁面與設定</a></li>
+          <li class="level-3"><a href="#sec-b-2-1">基本商店設定</a></li>
+          <li class="level-3"><a href="#sec-b-2-2">商店上線前檢查</a></li>
+          <li class="level-2"><a href="#sec-b-3">B.3 商品類型與商品資料</a></li>
+          <li class="level-3"><a href="#sec-b-3-1">常見商品類型</a></li>
+          <li class="level-3"><a href="#sec-b-3-2">商品屬性與變化</a></li>
+          <li class="level-2"><a href="#sec-b-4">B.4 購物車與結帳流程</a></li>
+          <li class="level-3"><a href="#sec-b-4-1">結帳欄位</a></li>
+          <li class="level-3"><a href="#sec-b-4-2">常見訂單狀態</a></li>
+          <li class="level-2"><a href="#sec-b-5">B.5 金流、物流與稅務</a></li>
+          <li class="level-3"><a href="#sec-b-5-1">金流</a></li>
+          <li class="level-3"><a href="#sec-b-5-2">物流</a></li>
+          <li class="level-3"><a href="#sec-b-5-3">稅務</a></li>
+          <li class="level-2"><a href="#sec-b-6">B.6 資料與開發模型</a></li>
+          <li class="level-3"><a href="#sec-b-6-1">取得商品資料</a></li>
+          <li class="level-3"><a href="#sec-b-6-2">判斷 WooCommerce 是否啟用</a></li>
+          <li class="level-3"><a href="#sec-b-6-3">常見 Hook 情境</a></li>
+          <li class="level-2"><a href="#sec-b-7">B.7 維運與效能注意事項</a></li>
+          <li class="level-2"><a href="#sec-b-8">B.8 參考資料</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> minhuangyuntech · WP2026
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
